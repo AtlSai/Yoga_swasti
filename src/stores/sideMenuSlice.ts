@@ -18,26 +18,31 @@ export interface SideMenuState {
 const initialState: SideMenuState = {
   menu: [
     {
+      icon: "BookMarked",
+      pathname: "/dashboard-overview-4",
+      title: "Dashboard",
+    },
+    {
       icon: "GaugeCircle",
       pathname: "/",
-      title: "Dashboard",
+      title: "Dictionary",
     },
     {
       icon: "ActivitySquare",
       pathname: "/dashboard-overview-2",
-      title: "Dictionary",
-    },
-    {
-      icon: "Album",
-      pathname: "/dashboard-overview-3",
       title: "Judgement",
     },
-    
     // {
-    //   icon: "BookMarked",
-    //   pathname: "/dashboard-overview-4",
-    //   title: "Factory",
+    //   icon: "Album",
+    //   pathname: "/dashboard-overview-3",
+    //   title: "Judgement",
     // },
+    
+    //  {
+    //    icon: "BookMarked",
+    //    pathname: "/dashboard-overview-4",
+    //    title: "Factory",
+    //  },
     // {
     //   icon: "HardDrive",
     //   pathname: "/dashboard-overview-5",

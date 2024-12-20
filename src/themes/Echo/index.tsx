@@ -362,11 +362,11 @@ function Main() {
         fixed h-[64px] transition-[margin] duration-100 xl:ml-[258px] group-[.side-menu--collapsed]:xl:ml-[90px] mt-3 m-auto inset-x-0 top-0"
         >
           <div
-            // className={clsx([
-            //   "top-bar absolute left-0  right-0 h-full group",
-            //   "before:content-[''] before:absolute before:top-0 before:inset-x-0 before:-mt-[15px] before:h-[20px] before:backdrop-blur",
-            //   topBarActive && "top-bar--/active",
-            // ])}
+          // className={clsx([
+          //   "top-bar absolute left-0  right-0 h-full group",
+          //   "before:content-[''] before:absolute before:top-0 before:inset-x-0 before:-mt-[15px] before:h-[20px] before:backdrop-blur",
+          //   topBarActive && "top-bar--/active",
+          // ])}
           >
             <div
               className="
@@ -505,55 +505,42 @@ function Main() {
                     <button
                       title="go"
                       onClick={() => setIsOpen(!isOpen)}
-                      className="p-2 rounded dark:hover:bg-gray-700"
+                      className="p-2 rounded hover:bg-gray-200 hover:text-black"
                     >
-                      <Search className="w-6 h-6 text-white dark:text-gray-200" />
+                      <Search className="w-6 h-6 text-white dark:text-gray-200 hover:text-black" />
                     </button>
 
                     {/* Search Bar */}
                     {isOpen && (
                       <div className="relative w-64">
                         {/* Search Icon */}
-                        <div className="absolute inset-y-0 left-0 flex justify-end  items-center pl-3">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 text-gray-400 flex float-right dark:text-gray-300"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M11 19a8 8 0 100-16 8 8 0 000 16zm10-2l-4.35-4.35"
-                            />
-                          </svg>
+                        <div className="absolute inset-y-0 left-0 flex justify-end items-center">
+                          <Search className="h-5 w-5 text-gray-400 dark:text-gray-300 hover:bg-gray-200 hover:text-black rounded-full p-1 transition duration-200 ease-in-out" />
                         </div>
 
                         {/* Search Input */}
                         <input
                           type="text"
                           placeholder="Search..."
-                          className="pl-10 pr-4 py-2 w-full rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
+                          className="pl-10 pr-4 py-2 w-full rounded border hover:bg-gray-200 hover:text-black  border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
                         />
                       </div>
                     )}
                   </div>
                   <button
                     onClick={toggleDarkMode}
-                    className="flex items-center p-2"
+                    className="flex items-center justify-center p-1.5 rounded hover:bg-gray-200 hover:text-black"
                   >
                     {darkMode ? (
-                      <Sun className="w-6 h-6 text-yellow-500" />
+                      <Sun className="w-6 h-6 text-white hover:text-black " />
                     ) : (
-                      <Moon className="w-6 h-6 text-white" />
+                      <Moon className="w-6 h-6 text-white hover:text-black" />
                     )}
-                    <span className="ml-2">{darkMode ? "" : ""}</span>
+                    <span className="">{darkMode ? "" : ""}</span>
                   </button>
                   <a
                     href=""
-                    className="p-2 text-black rounded-full hover:bg-black/5"
+                    className="p-2 text-black rounded-full "
                     onClick={(e) => {
                       e.preventDefault();
                       setNotificationsPanel(true);
@@ -561,7 +548,7 @@ function Main() {
                   >
                     <Lucide
                       icon="Bell"
-                      className="text-white dark:text-gray-200 w-[25px] h-[25px]"
+                      className="text-white w-6 h-6 stroke-[2px] rounded hover:bg-gray-200 hover:text-black"
                     />
                   </a>
                 </div>
@@ -645,13 +632,14 @@ function Main() {
       </div>
       <div
         className={clsx([
-          "transition-[margin,width] duration-100 xl:pl-3.5 pt-[54px] pb-16 relative z-10 group mode",
+          "transition-[margin,width] duration-100  pt-[54px] pb-16 relative z-10 group mode",
           { "xl:ml-[275px]": !compactMenu },
           { "xl:ml-[91px]": compactMenu },
           { "mode--light": !topBarActive },
         ])}
       >
-        <div className="px-5 mt-16">
+        {/* <div className="px-5 mt-16"> */}
+        <div className="mt-16">
           <div className="container">
             <Outlet />
           </div>
