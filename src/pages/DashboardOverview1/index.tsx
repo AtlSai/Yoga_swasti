@@ -2,12 +2,22 @@ import { useState } from "react";
 import logo from "@/assets/logo_law.webp";
 import { Search, TrendingUp, History } from "lucide-react";
 import Lucide from "@/components/Base/Lucide";
+import {
+  FormLabel,
+  FormCheck,
+  FormInput,
+  FormInline,
+  FormSelect,
+  FormSwitch,
+  InputGroup,
+  FormHelp,
+} from "@/components/Base/Form";
 // import { ChevronDownIcon } from "lucide-react";
 
 function SearchComponent() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("All");
- 
+
   // Toggle dropdown visibility
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
@@ -18,49 +28,28 @@ function SearchComponent() {
   };
 
   return (
-    <div className="flex items-center mt-[30px] m-auto w-full md:w-[65%] mr-[280px] md:mb-0 relative">
-      <div className="relative">
-        <button
-          className="h-[40px] w- flex absolute right top-1/2 transform -translate-y-1/2 bg- text-black border px-4 py-2 rounded-lg  focus:outline-none"
-          onClick={toggleDropdown}
-        >
-          <Lucide icon="ChevronDown" className="w-5 h-5 flex float-left" />
-          {selectedOption}
-        </button>
-        {/* Dropdown menu */}
-        {dropdownOpen && (
-          <div className="absolute mt-5 w-40 bg-white  rounded-lg shadow-lg z-20">
-            <ul>
-              <li
-                className="px-4 z-20 py-2 text-gray-700 cursor-pointer hover:bg-blue-100"
-                onClick={() => handleSelectOption("All")}
-              >
-                All
-              </li>
-              <li
-                className="px-4 text-gray-700 cursor-pointer hover:bg-blue-100"
-                onClick={() => handleSelectOption("LegalTerm")}
-              >
-                LegalTerm
-              </li>
-              <li
-                className="px-4 py-2 text-gray-700 cursor-pointer hover:bg-blue-100"
-                onClick={() => handleSelectOption("Definition")}
-              >
-                Definition
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
+   <div className="flex items-center mt-6 mx-auto w-[680px] ml-[-420px] md:w-[65%] relative">
+  {/* Search Icon */}
+  {/* <Search className="absolute mr-[-200px] top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" /> */}
 
-      <Search className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 mr-5 w-6 h-6" />
-      <input
-        type="text"
-        placeholder="What you looking for...."
-        className="w-full h-[36px] md:h-[40px] pl-32 pr-12 text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
-      />
-    </div>
+  {/* Search Bar Container */}
+  <div className="flex w-[700px] h-[40px] bg-white border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+    {/* FormSelect Inside Search Bar */}
+    <FormSelect className="w-[30%] md:w-[20%] bg-gray-100 text-gray-600 text-sm px-3 focus:outline-none">
+      <option value="monthly">All</option>
+      <option value="yearly">Legal Terms</option>
+      <option value="weekly">Definition</option>
+    </FormSelect>
+
+    {/* Input Field */}
+    <input
+      type="text"
+      placeholder="What are you looking for..."
+      className="w-full text-sm text-gray-700 px-4 focus:outline-none"
+    />
+  </div>
+</div>
+
   );
 }
 
@@ -167,7 +156,8 @@ const Main = () => {
         <>
           <div className="bg-blue-600  m-auto fixed top-0 w-full h-[170px] flex ">
             {/* Logo and Title */}
-            <div className="pl-4 flex items-center m-auto mt-[-90px] space-x-3 mb-3 md:mb-0">
+            <div className="mr-[440px]">
+            <div className="flex items-center gap-3 pt-3 pl-4">
               <img
                 src={logo}
                 alt="Lawwheels Logo"
@@ -177,10 +167,12 @@ const Main = () => {
                 Lawwheels
               </h1>
             </div>
+            </div>
 
             {/* Search Bar */}
             <SearchComponent />
           </div>
+          {/* <SearchComponent /> */}
 
           <div className="fixed w-full text-center m-auto ">
             <div className="flex mt-[-40px] flex-wrap justify-center m-auto w-full md:w-[65%] mr-[280px] md:mb-0 relative">
@@ -195,45 +187,48 @@ const Main = () => {
             </div>
           </div>
           {/* Content Section Below */}
-         
-     <div className="w-[1173px]  m-auto bg-white mt-[110px] grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
-  {Array(8)
-    .fill(0)
-    .map((_, index) => (
-      <div
-        key={index}
-        className={`bg-white ${
-          expanded[index] ? "md:col-span-2 -order-1" : "w-[550px]"
-        } border border-gray-300 rounded-lg shadow-sm p-4 transition-all duration-300`}
-      >
-        <h3 className="text-base font-semibold text-gray-800 mb-4">Always</h3>
-        <div className="md:flex-row m-auto gap-4">
-          <p className="text-sm text-gray-600 leading-relaxed flex-1">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-            {expanded[index] && (
-              <span>
-                {" "}
-                More details about the content. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an
-                unknown printer took a galley of type and scrambled it to make
-                a type specimen book.
-              </span>
-            )}
-          </p>
-          <button
-            className="text-blue-500 flex float-right"
-            onClick={() => handleReadMore(index)}
-          >
-            {expanded[index] ? "Read Less" : "Read More"}
-          </button>
-        </div>
-      </div>
-    ))}
-</div>
-{/* <div className="px-1">
+
+          <div className="w-[1173px]  m-auto bg-white mt-[110px] grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
+            {Array(8)
+              .fill(0)
+              .map((_, index) => (
+                <div
+                  key={index}
+                  className={`bg-white ${
+                    expanded[index] ? "md:col-span-2 -order-1" : "w-[550px]"
+                  } max-775:w-[100%] border border-gray-300 rounded-lg shadow-sm p-4 transition-all duration-300`}
+                >
+                  <h3 className="text-base font-semibold text-gray-800 mb-4">
+                    Always
+                  </h3>
+                  <div className="md:flex-row m-auto gap-4">
+                    <p className="text-sm text-gray-600 leading-relaxed flex-1">
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry. Lorem Ipsum has been the industry's
+                      standard dummy text ever since the 1500s, when an unknown
+                      printer took a galley of type and scrambled it to make a
+                      type specimen book.
+                      {expanded[index] && (
+                        <span>
+                          {" "}
+                          More details about the content. Lorem Ipsum has been
+                          the industry's standard dummy text ever since the
+                          1500s, when an unknown printer took a galley of type
+                          and scrambled it to make a type specimen book.
+                        </span>
+                      )}
+                    </p>
+                    <button
+                      className="text-blue-500 flex float-right"
+                      onClick={() => handleReadMore(index)}
+                    >
+                      {expanded[index] ? "Read Less" : "Read More"}
+                    </button>
+                  </div>
+                </div>
+              ))}
+          </div>
+          {/* <div className="px-1">
                   <div className="overflow-hidden relative flex flex-col w-full h-full p-5 rounded-[0.5rem]">
                    
                     <div className="mt-12 mb-9">
@@ -287,7 +282,6 @@ const Main = () => {
                     </a>
                   </div>
                 </div> */}
-
         </>
       )}
     </div>

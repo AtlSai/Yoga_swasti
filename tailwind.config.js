@@ -24,6 +24,8 @@ module.exports = {
     extend: {
       screens: {
         "3xl": "1600px",
+        'max-775': { max: '775px' }, // Media query for less than 775px
+
       },
       colors: {
         theme: {

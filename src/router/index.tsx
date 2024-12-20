@@ -70,15 +70,15 @@ function Router() {
       children: [
         {
           path: "/",
+          element: <DashboardOverview3 />,
+        },
+        {
+          path: "dictionary",
           element: <DashboardOverview1 />,
         },
         {
-          path: "dashboard-overview-2",
+          path: "judgement",
           element: <DashboardOverview2 />,
-        },
-        {
-          path: "dashboard-overview-3",
-          element: <DashboardOverview3 />,
         },
         {
           path: "dashboard-overview-4",

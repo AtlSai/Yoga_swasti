@@ -106,7 +106,7 @@ function Main() {
         "bg-[url('@/assets/Group 460.png')] echo group bg-gradient-to-b from-slate-200/70 to-slate-50 background relative min-h-screen dark:from-darkmode-800/[.95] dark:to-darkmode-900/[.95]",
         "before:content-[''] before:h-[315px] before:w-screen before:bg-[#1262D2] [&.background--hidden]:before:opacity-0 before:transition-[opacity,height] before:ease-in-out before:duration-300 before:top-0 before:fixed z-10",
         "after:content-[''] after:h-[315px] after:w-screen [&.background--hidden]:after:opacity-0 after:transition-[opacity,height] after:ease-in-out after:duration-300 after:top-0 after:fixed after:bg-texture-white after:bg-contain after:bg-fixed after:bg-[center_-13rem] after:bg-no-repeat",
-        // topBarActive && "background--hidden",
+        topBarActive && "background--hidden",
       ])}
     >
       <div
@@ -505,51 +505,44 @@ function Main() {
                     <button
                       title="go"
                       onClick={() => setIsOpen(!isOpen)}
-                      className="p-2 rounded hover:bg-gray-200 hover:text-black"
+                      className="p-2 rounded text-white rounded-full hover:bg-white/5"
                     >
-                      <Search className="w-6 h-6 text-white dark:text-gray-200 hover:text-black" />
+                       {!isOpen && (
+                      <Search className="w-6 h-6 text-white dark:text-gray-200" />
+                      )}
                     </button>
 
                     {/* Search Bar */}
                     {isOpen && (
                       <div className="relative w-64">
                         {/* Search Icon */}
-                        <div className="absolute inset-y-0 left-0 flex justify-end items-center">
-                          <Search className="h-5 w-5 text-gray-400 dark:text-gray-300 hover:bg-gray-200 hover:text-black rounded-full p-1 transition duration-200 ease-in-out" />
+                        <div className="bg-white/[0.12] dark:bg-darkmode-900/30 dark:border-transparent border-transparent border w-[260px] flex items-center py-2 px-3.5 rounded-[0.5rem] text-white/60 cursor-pointer hover:bg-white/[0.15] transition-colors duration-300 hover:duration-100">
+                          <Lucide icon="Search" className="w-[18px] h-[18px]" />
+                          <div className="ml-2.5 mr-auto">Quick search...</div>
                         </div>
-
-                        {/* Search Input */}
-                        <input
-                          type="text"
-                          placeholder="Search..."
-                          className="pl-10 pr-4 py-2 w-full rounded border hover:bg-gray-200 hover:text-black  border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
-                        />
                       </div>
                     )}
                   </div>
                   <button
                     onClick={toggleDarkMode}
-                    className="flex items-center justify-center p-1.5 rounded hover:bg-gray-200 hover:text-black"
+                    className="flex items-center justify-center p-1.5 text-white rounded-full hover:bg-white/5"
                   >
                     {darkMode ? (
-                      <Sun className="w-6 h-6 text-white hover:text-black " />
+                      <Sun className="w-6 h-6 text-white" />
                     ) : (
-                      <Moon className="w-6 h-6 text-white hover:text-black" />
+                      <Moon className="w-6 h-6 text-white" />
                     )}
                     <span className="">{darkMode ? "" : ""}</span>
                   </button>
                   <a
                     href=""
-                    className="p-2 text-black rounded-full "
+                    className="p-2 text-white rounded-full hover:bg-white/5"
                     onClick={(e) => {
                       e.preventDefault();
                       setNotificationsPanel(true);
                     }}
                   >
-                    <Lucide
-                      icon="Bell"
-                      className="text-white w-6 h-6 stroke-[2px] rounded hover:bg-gray-200 hover:text-black"
-                    />
+                    <Lucide icon="Bell" className="stroke-[2px] w-6 h-6" />
                   </a>
                 </div>
                 <Menu className="ml-5">

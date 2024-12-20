@@ -19,24 +19,24 @@ const initialState: SideMenuState = {
   menu: [
     {
       icon: "BookMarked",
-      pathname: "/dashboard-overview-4",
+      pathname: "/",
       title: "Dashboard",
     },
     {
       icon: "GaugeCircle",
-      pathname: "/",
+      pathname: "/dictionary",
       title: "Dictionary",
     },
     {
       icon: "ActivitySquare",
-      pathname: "/dashboard-overview-2",
-      title: "Judgement",
+      pathname: "/Judgement",
+      title: "Judgement",   
     },
-    // {
-    //   icon: "Album",
-    //   pathname: "/dashboard-overview-3",
-    //   title: "Judgement",
-    // },
+    {
+      icon: "Album",
+      pathname: "/Factory",
+      title: "Factory",
+    },
     
     //  {
     //    icon: "BookMarked",
