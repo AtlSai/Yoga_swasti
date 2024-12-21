@@ -359,7 +359,7 @@ function Main() {
         </div>
         <div
           className="
-        fixed h-[64px] transition-[margin] duration-100 xl:ml-[258px] group-[.side-menu--collapsed]:xl:ml-[90px] mt-3 m-auto inset-x-0 top-0"
+        fixed z-10 h-[64px] transition-[margin] duration-100 xl:ml-[258px] group-[.side-menu--collapsed]:xl:ml-[90px] mt-3 m-auto inset-x-0 top-0"
         >
           <div
           // className={clsx([
@@ -370,7 +370,7 @@ function Main() {
           >
             <div
               className="
-             container flex items-center w-full h-full transition-[padding,background-color,border-color] ease-in-out duration-300 box bg-transparent border-transparent rounded-none shadow-none dark:bg-transparent dark:border-transparent
+             container z-10 flex items-center w-full h-full transition-[padding,background-color,border-color] ease-in-out duration-300 box bg-transparent border-transparent rounded-none shadow-none dark:bg-transparent dark:border-transparent
              group-[.top-bar--active]:box group-[.top-bar--active]:px-5
            "
             >
@@ -478,7 +478,7 @@ function Main() {
                 </p>
               </div> */}
               {/* BEGIN: Notification & User Menu */}
-              <div className="flex items-center flex-1">
+              <div className="z-10 flex items-center flex-1">
                 <div className="flex items-center gap-1 ml-auto">
                   <a
                     href=""
@@ -500,7 +500,7 @@ function Main() {
                   >
                     {/* <Lucide icon="Expand" className="w-[18px] h-[18px]" /> */}
                   </a>
-                  <div className="flex items-center">
+                  <div className="z-10 flex items-center">
                     {/* Search Icon */}
                     <button
                       title="go"
@@ -525,7 +525,7 @@ function Main() {
                   </div>
                   <button
                     onClick={toggleDarkMode}
-                    className="flex items-center justify-center p-1.5 text-white rounded-full hover:bg-white/5"
+                    className="flex items-center z-10 justify-center p-1.5 text-white rounded-full hover:bg-white/5"
                   >
                     {darkMode ? (
                       <Sun className="w-6 h-6 text-white" />
