@@ -28,28 +28,24 @@ function SearchComponent() {
   };
 
   return (
-   <div className="flex items-center mt-6 mx-auto w-[680px] ml-[-420px] md:w-[65%] relative">
-  {/* Search Icon */}
-  {/* <Search className="absolute mr-[-200px] top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" /> */}
+    <div className="flex justify-center pr-[220px] items-center pt-20 w-full px-4">
+      {/* Search Bar Container */}
+      <div className="flex w-full  h-[40px] bg-white border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+        {/* FormSelect Inside Search Bar */}
+        <FormSelect className="w-[30%] md:w-[20%] bg-gray-100 text-gray-600 text-sm px-3 focus:outline-none">
+          <option value="monthly">All</option>
+          <option value="yearly">Legal Terms</option>
+          <option value="weekly">Definition</option>
+        </FormSelect>
 
-  {/* Search Bar Container */}
-  <div className="flex w-[700px] h-[40px] bg-white border border-gray-300 rounded-lg overflow-hidden shadow-sm">
-    {/* FormSelect Inside Search Bar */}
-    <FormSelect className="w-[30%] md:w-[20%] bg-gray-100 text-gray-600 text-sm px-3 focus:outline-none">
-      <option value="monthly">All</option>
-      <option value="yearly">Legal Terms</option>
-      <option value="weekly">Definition</option>
-    </FormSelect>
-
-    {/* Input Field */}
-    <input
-      type="text"
-      placeholder="What are you looking for..."
-      className="w-full text-sm text-gray-700 px-4 focus:outline-none"
-    />
-  </div>
-</div>
-
+        {/* Input Field */}
+        <input
+          type="text"
+          placeholder="What are you looking for..."
+          className="w-full text-sm text-gray-700  px-4 focus:outline-none"
+        />
+      </div>
+    </div>
   );
 }
 
@@ -66,7 +62,7 @@ const Main = () => {
   };
 
   return (
-    <div className="w-full pr-6">
+    <div className="w-full">
       {!show && (
         <div className="w-full mt-[-80px] rounded-xl flex flex-col mr-8">
           <img
@@ -74,11 +70,11 @@ const Main = () => {
             alt="Logo"
             className="w-[115px] h-[115px] mt-[-10px] m-auto"
           />
-          <h1 className="text-[34px] flex items-center justify-center w-[400px] h-[60px] m-auto text-white font-publicSans font-semibold">
+          <h1 className="text-[28px] mt-6 sm:text-[34px] md:text-[40px] lg:text-[48px] flex items-center justify-center w-[90%] max-w-[600px] h-auto m-auto text-white font-publicSans font-semibold text-center">
             Understand Law Better
           </h1>
 
-          <div className="m-auto w-full px-4">
+          <div className="m-auto mt-6 w-full px-4">
             {/* Search Bar */}
             <div
               className="w-full sm:w-[90%] md:w-[75%] lg:w-[60%] xl:w-[50%] m-auto"
@@ -104,7 +100,7 @@ const Main = () => {
             </div>
           </div>
 
-          <div className="w-full flex flex-col md:flex-row gap-10 md:gap-40 items-center justify-center mt-6 p-4 rounded-lg">
+          <div className="w-full flex flex-col md:flex-row gap-10 md:gap-40 items-center justify-center mt-2 p-4 rounded-lg">
             {/* Popular Legal Terms */}
             <div className="flex flex-col mt-4 items-center w-full md:w-auto">
               <div className="flex">
@@ -154,55 +150,70 @@ const Main = () => {
 
       {show && (
         <>
-          <div className="bg-blue-600  m-auto fixed top-0 w-full h-[170px] flex ">
-            {/* Logo and Title */}
-            <div className="mr-[440px]">
-            <div className="flex items-center gap-3 pt-3 pl-4">
-              <img
-                src={logo}
-                alt="Lawwheels Logo"
-                className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full"
-              />
-              <h1 className="text-white text-xl md:text-2xl font-bold">
-                Lawwheels
-              </h1>
-            </div>
-            </div>
+          <div className="w-full bg-white">
+            {/* Header Section */}
+            <div className="bg-blue-600 h-[200px] fixed top-0 w-full flex flex-wrap items-center justify-between px-4 md:px-8 py-2">
+              {/* Logo and Title */}
+              <div className="flex items-center gap-3 mx-auto md:ml-10 mt-[50px] md:mt-0">
+                <img
+                  src={logo}
+                  alt="Lawwheels Logo"
+                  className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full"
+                />
+                <h1 className="text-white text-xl md:text-2xl font-bold">
+                  Lawwheels
+                </h1>
+              </div>
 
-            {/* Search Bar */}
-            <SearchComponent />
+              {/* Search Component */}
+              <div className="flex justify-center items-center w-full">
+                {/* Search Bar Container */}
+                <div className="flex w-full max-w-[600px] flex justify-center items-center mt-[5px] h-[40px] bg-white rounded-lg overflow-hidden shadow-sm">
+                  {/* FormSelect Inside Search Bar */}
+                  <FormSelect className="w-[30%] h-[38px]  md:w-[24%] bg-gray-100 text-gray-600 text-sm px-3 focus:outline-none">
+                    <option value="monthly">All</option>
+                    <option value="yearly">Legal Terms</option>
+                    <option value="weekly">Definition</option>
+                  </FormSelect>
+
+                  {/* Input Field */}
+                  <input
+                    type="text"
+                    placeholder="What are you looking for..."
+                    className="w-full text-sm h-[40px] text-gray-700 px-4"
+                  />
+                </div>
+              </div>
+
+              <div className=" w-full flex flex-wrap justify-center items-center px-4 py-2">
+                {Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ#").map((letter) => (
+                  <button
+                    key={letter}
+                    className="text-white text-xs sm:text-sm md:text-base hover:text-blue-300 focus:text-blue-300 px-1"
+                  >
+                    {letter}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
-          {/* <SearchComponent /> */}
 
-          <div className="fixed w-full text-center m-auto ">
-            <div className="flex mt-[-40px] flex-wrap justify-center m-auto w-full md:w-[65%] mr-[280px] md:mb-0 relative">
-              {Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ#").map((letter) => (
-                <button
-                  key={letter}
-                  className="text-white text-sm md:text-sm hover:text-blue-300 focus:text-blue-300 px-2"
-                >
-                  {letter}
-                </button>
-              ))}
-            </div>
-          </div>
-          {/* Content Section Below */}
-
-          <div className="w-[1173px]  m-auto bg-white mt-[110px] grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
+          {/* Content Section */}
+          <div className="container bg-white mx-auto mt-[120px]  px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             {Array(8)
               .fill(0)
               .map((_, index) => (
                 <div
                   key={index}
                   className={`bg-white ${
-                    expanded[index] ? "md:col-span-2 -order-1" : "w-[550px]"
-                  } max-775:w-[100%] border border-gray-300 rounded-lg shadow-sm p-4 transition-all duration-300`}
+                    expanded[index] ? "md:col-span-2 -order-1" : ""
+                  } border mt-10 border-gray-300 rounded-lg shadow-sm p-4 transition-all duration-300`}
                 >
                   <h3 className="text-base font-semibold text-gray-800 mb-4">
                     Always
                   </h3>
-                  <div className="md:flex-row m-auto gap-4">
-                    <p className="text-sm text-gray-600 leading-relaxed flex-1">
+                  <div className="flex flex-col gap-4">
+                    <p className="text-sm text-gray-600 leading-relaxed">
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been the industry's
                       standard dummy text ever since the 1500s, when an unknown
@@ -219,7 +230,7 @@ const Main = () => {
                       )}
                     </p>
                     <button
-                      className="text-blue-500 flex float-right"
+                      className="text-blue-500 self-end"
                       onClick={() => handleReadMore(index)}
                     >
                       {expanded[index] ? "Read Less" : "Read More"}
@@ -228,60 +239,6 @@ const Main = () => {
                 </div>
               ))}
           </div>
-          {/* <div className="px-1">
-                  <div className="overflow-hidden relative flex flex-col w-full h-full p-5 rounded-[0.5rem]">
-                   
-                    <div className="mt-12 mb-9">
-                      <div className="text-2xl font-medium leading-snug text-white">
-                      {Array(8)
-    .fill(0)
-    .map((_, index) => (
-      <div
-        key={index}
-        className={`bg-white ${
-          expanded[index] ? "md:col-span-2 -order-1" : "w-[550px]"
-        } border border-gray-300 rounded-lg shadow-sm p-4 transition-all duration-300`}
-      >
-        <h3 className="text-base font-semibold text-gray-800 mb-4">Always</h3>
-        <div className="md:flex-row m-auto gap-4">
-          <p className="text-sm text-gray-600 leading-relaxed flex-1">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-            {expanded[index] && (
-              <span>
-                {" "}
-                More details about the content. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an
-                unknown printer took a galley of type and scrambled it to make
-                a type specimen book.
-              </span>
-            )}
-          </p>
-          <button
-            className="text-blue-500 flex float-right"
-            onClick={() => handleReadMore(index)}
-          >
-            {expanded[index] ? "Read Less" : "Read More"}
-          </button>
-        </div>
-      </div>
-    ))}
-                      </div>
-                      <div className="mt-1.5 text-lg text-white/70">
-                        Boost performance!
-                      </div>
-                    </div>
-                    <a
-                      className="flex items-center font-medium text-white"
-                      href=""
-                    >
-                      Get started
-                      <Lucide icon="ArrowRight" className="w-4 h-4 ml-1.5" />
-                    </a>
-                  </div>
-                </div> */}
         </>
       )}
     </div>

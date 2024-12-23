@@ -31,6 +31,7 @@ import NotificationsPanel from "@/components/NotificationsPanel";
 import ActivitiesPanel from "@/components/ActivitiesPanel";
 import { Menu } from "@/components/Base/Headless";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 function Main() {
   const [subcategory, setSubcategory] = useState(["0"]);
@@ -39,9 +40,17 @@ function Main() {
   const [show, setShow] = useState(false);
   const [non, setnon] = useState(false);
   const [quickSearch, setQuickSearch] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  // const [setSearchTerm] = useState(false);
   const [notificationsPanel, setNotificationsPanel] = useState(false);
   const [activitiesPanel, setActivitiesPanel] = useState(false);
   const navigate = useNavigate();
+  const formRef = useRef(null);
+
+  const handleClearAll = () => {
+    // formRef.current.reset();  // This will clear the form inputs
+    const formRef = useRef<HTMLFormElement | null>(null);
+  };
 
   return (
     <>
@@ -51,7 +60,7 @@ function Main() {
             <h1 className="text-2xl"> Find Judgement </h1>
             <div>
               {/* BEGIN: Breadcrumb */}
-              <Breadcrumb className="flex-1 hidden xl:block">
+              <Breadcrumb className="flex-1 hidden xl:block ">
                 <Breadcrumb.Link
                   className="dark:before:bg-chevron-black"
                   to="/"
@@ -76,72 +85,74 @@ function Main() {
               {/* BEGIN: Search */}
             </div>
           </div>
-          <div className="mt-5">
-            <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
-              <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
-                <div className="text-left">
-                  <div className="flex items-center">
-                    <div className="font-medium">Search in taxt</div>
+          <form ref={formRef}>
+            <div className="mt-5">
+              <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
+                <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
+                  <div className="text-left">
+                    <div className="flex items-center">
+                      <div className="font-medium">Search in text</div>
+                    </div>
+                    <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
+                      Enter the unique name of your product. Make it descriptive
+                      and easy to remember for customers.
+                    </div>
                   </div>
-                  <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
-                    Enter the unique name of your product. Make it descriptive
-                    and easy to remember for customers.
-                  </div>
+                </label>
+                <div className="flex-1 w-full mt-3 xl:mt-0">
+                  <FormInput
+                    type="text"
+                    placeholder="Search your keyword here"
+                    className="text-black h-[40px]"
+                  />
+                  {/* <FormHelp>Maximum character 0/70</FormHelp> */}
                 </div>
-              </label>
-              <div className="flex-1 w-full mt-3 xl:mt-0">
-                <FormInput
-                  type="text"
-                  placeholder="Search your keyword here"
-                  className="text-black"
-                />
-                {/* <FormHelp>Maximum character 0/70</FormHelp> */}
               </div>
-            </div>
-            <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
-              <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
-                <div className="text-left">
-                  <div className="flex items-center">
-                    <div className="font-medium">Court name</div>
+              <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
+                <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
+                  <div className="text-left">
+                    <div className="flex items-center">
+                      <div className="font-medium">Court name</div>
+                    </div>
+                    <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
+                      Select the primary category that best represents your
+                      product. This helps customers find your product more
+                      easily.
+                    </div>
                   </div>
-                  <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
-                    Select the primary category that best represents your
-                    product. This helps customers find your product more easily.
-                  </div>
-                </div>
-              </label>
-              <div className="flex-1 w-full mt-3 xl:mt-0">
-                {/* <FormSelect id="category">
+                </label>
+                <div className="flex-1 w-full mt-3 xl:mt-0">
+                  {/* <FormSelect id="category">
              {categories.fakeCategories().map((faker, fakerKey) => (
                <option key={fakerKey} value={fakerKey}>
                  {faker.name}
                </option>
              ))}
            </FormSelect> */}
-                <FormSelect className="py-3 w-full">
-                  <option value="monthly">Court name</option>
-                  <option value="yearly">Yearly</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="daily">Daily</option>
-                </FormSelect>
+                  <FormSelect className="py-3 w-full h-[40px]">
+                    <option value="monthly">Court name</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                  </FormSelect>
+                </div>
               </div>
-            </div>
-            <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
-              <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
-                <div className="text-left">
-                  <div className="flex items-center">
-                    <div className="font-medium">Party name</div>
-                    {/* <div className="ml-2.5 px-2 py-0.5 bg-slate-100 text-slate-500 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md border border-slate-200">
+              <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
+                <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
+                  <div className="text-left">
+                    <div className="flex items-center">
+                      <div className="font-medium">Party name</div>
+                      {/* <div className="ml-2.5 px-2 py-0.5 bg-slate-100 text-slate-500 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md border border-slate-200">
                  Required
                </div> */}
+                    </div>
+                    <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
+                      Choose a more specific subcategory that closely matches
+                      your product. It provides further details about your item.
+                    </div>
                   </div>
-                  <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
-                    Choose a more specific subcategory that closely matches your
-                    product. It provides further details about your item.
-                  </div>
-                </div>
-              </label>
-              {/* <div className="flex-1 w-full mt-3 xl:mt-0">
+                </label>
+                {/* <div className="flex-1 w-full mt-3 xl:mt-0">
            <TomSelect
              value={subcategory}
              onChange={(e) => {
@@ -161,106 +172,105 @@ function Main() {
            </TomSelect>
               <FormInput type="text" placeholder="Party name" />
          </div> */}
-              <div className="flex mt-3 gap-6 xl:mt-0">
-                {/* <FormInput type="text" placeholder="Select one" className="w-[350px]"/> */}
-                <FormSelect className="py-3 w-[40%]">
-                  <option value="monthly">Select one</option>
-                  <option value="yearly">Yearly</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="daily">Daily</option>
-                </FormSelect>
-                <FormInput
-                  type="text"
-                  placeholder="Petitioner/Respondent"
-                  className="w-[700px]"
-                />
-              </div>
-            </div>
-            <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
-              <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
-                <div className="text-left">
-                  <div className="flex w-[240px] items-center">
-                    <div className="font-medium">Yaer/Volume</div>
-                  </div>
-                  <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
-                    Choose a more specific subcategory that closely matches your
-                    product. It provides further details about your item.
-                  </div>
+                <div className="flex mt-3 gap-6 xl:mt-0">
+                  {/* <FormInput type="text" placeholder="Select one" className="w-[350px]"/> */}
+                  <FormSelect className="py-3 w-[40%] h-[40px]">
+                    <option value="monthly">Select one</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                  </FormSelect>
+                  <FormInput
+                    type="text"
+                    placeholder="Petitioner/Respondent"
+                    className="w-[700px] h-[40px]"
+                  />
                 </div>
-              </label>
-              <div className="flex w-full mt-3 gap-6">
-                {/* <FormInput type="text" placeholder="Select one" className="w-[350px]"/> */}
-                <FormSelect className="py-3 w-[50%]">
-                  <option value="monthly">Yaer</option>
-                  <option value="yearly">Yearly</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="daily">Daily</option>
-                </FormSelect>
-                <FormSelect className="py-3 w-[50%]">
-                  <option value="monthly">Volume</option>
-                  <option value="yearly">Yearly</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="daily">Daily</option>
-                </FormSelect>
               </div>
-            </div>
-            <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
-              <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
-                <div className="text-left">
-                  <div className="flex w-[250px] items-center">
-                    <div className="font-medium">Case Type</div>
+              <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
+                <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
+                  <div className="text-left">
+                    <div className="flex w-[240px] items-center">
+                      <div className="font-medium">Year/Volume</div>
+                    </div>
+                    <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
+                      Choose a more specific subcategory that closely matches
+                      your product. It provides further details about your item.
+                    </div>
                   </div>
-                  <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
-                    Choose a more specific subcategory that closely matches your
-                    product. It provides further details about your item.
-                  </div>
+                </label>
+                <div className="flex w-full mt-3 gap-6">
+                  {/* <FormInput type="text" placeholder="Select one" className="w-[350px]"/> */}
+                  <FormSelect className="py-3 w-[50%] h-[40px]">
+                    <option value="monthly">Year</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                  </FormSelect>
+                  <FormSelect className="py-3 w-[50%] h-[40px]">
+                    <option value="monthly">Volume</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                  </FormSelect>
                 </div>
-              </label>
-              <div className="flex flex-wrap w-full mt-3 gap-6 xl:mt-0">
-                {/* <FormInput type="text" placeholder="Select one" className="w-[250px]"/> */}
-                <FormSelect className="py-3 w-[20%]">
-                  <option value="monthly">Case Type</option>
-                  <option value="yearly">Yearly</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="daily">Daily</option>
-                </FormSelect>
-                <FormInput
-                  type="text"
-                  placeholder="Case no"
-                  className="w-[450px]"
-                />
-                <FormSelect className="py-3 w-[20%]">
-                  <option value="monthly">Year</option>
-                  <option value="yearly">Yearly</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="daily">Daily</option>
-                </FormSelect>
-                {/* <FormInput type="text" placeholder="Petitioner/Respondent" className="w-[250px]" /> */}
               </div>
-            </div>
-            <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
-              <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
-                <div className="text-left">
-                  <div className="flex w-[250px] items-center">
-                    <div className="font-medium">Date of Judgement</div>
+              <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
+                <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
+                  <div className="text-left">
+                    <div className="flex w-[250px] items-center">
+                      <div className="font-medium">Case Type</div>
+                    </div>
+                    <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
+                      Choose a more specific subcategory that closely matches
+                      your product. It provides further details about your item.
+                    </div>
                   </div>
-                  <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
-                    Enter the unique name of your product. Make it descriptive
-                    and easy to remember for customers.
-                  </div>
+                </label>
+                <div className="flex flex-wrap w-full mt-3 gap-6 xl:mt-0">
+                  {/* <FormInput type="text" placeholder="Select one" className="w-[250px]"/> */}
+                  <FormSelect className="py-3 h-[40px] w-[20%]">
+                    <option value="monthly">Case Type</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                  </FormSelect>
+                  <FormInput
+                    type="text"
+                    placeholder="Case no"
+                    className="w-[450px] h-[40px]"
+                  />
+                  <FormSelect className="py-3 h-[40px] w-[20%]">
+                    <option value="monthly">Year</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                  </FormSelect>
+                  {/* <FormInput type="text" placeholder="Petitioner/Respondent" className="w-[250px]" /> */}
                 </div>
-              </label>
-              <div className="flex w-full gap-20 mt- xl:mt-0">
-                {/* <FormInput type="text" placeholder="Search your keyword here" /> */}
+              </div>
+              <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
+                <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
+                  <div className="text-left">
+                    <div className="flex w-[250px] items-center">
+                      <div className="font-medium">Date of Judgement</div>
+                    </div>
+                    <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
+                      Enter the unique name of your product. Make it descriptive
+                      and easy to remember for customers.
+                    </div>
+                  </div>
+                </label>
+                <div className="flex w-full gap-20 mt- xl:mt-0">
+                  {/* <FormInput type="text" placeholder="Search your keyword here" /> */}
 
-                <FormSelect className="py-3 w-[40%]">
-                  <option value="monthly">mm/dd/yy</option>
-                  <option value="yearly">Yearly</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="daily">Daily</option>
-                </FormSelect>
-                <h1>to</h1>
-                {/* <div className="relative ">
+                  <FormInput
+                    type="text"
+                    placeholder="Date"
+                    className="w-[330px] h-[40px]"
+                  />
+                  <h1>to</h1>
+                  {/* <div className="relative ">
                   <Lucide
                     icon="Calendar"
                     className="absolute inset-y-0 left-0 z-10 w-4 h-4 my-auto ml-3 stroke-[1.3]"
@@ -286,69 +296,69 @@ function Main() {
                     className="pl-9 sm:w-64 rounded-[0.3rem]"
                   />
                 </div> */}
-                <FormSelect className="py-3 w-[40%]">
-                  <option value="monthly">mm/dd/yy</option>
-                  <option value="yearly">Yearly</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="daily">Daily</option>
-                </FormSelect>
-                {/* <FormHelp>Maximum character 0/70</FormHelp> */}
+                  <FormInput
+                    type="text"
+                    placeholder="Date"
+                    className="w-[330px] h-[40px]"
+                  />
+                  {/* <FormHelp>Maximum character 0/70</FormHelp> */}
+                </div>
               </div>
-            </div>
-            <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
-              <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
-                <div className="text-left">
-                  <div className="flex items-center">
-                    <div className="font-medium">Judgement Deliverd by</div>
-                    {/* <div className="ml-2.5 px-2 py-0.5 bg-slate-100 text-slate-500 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md border border-slate-200">
+              <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
+                <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
+                  <div className="text-left">
+                    <div className="flex items-center">
+                      <div className="font-medium">Judgement Deliverd by</div>
+                      {/* <div className="ml-2.5 px-2 py-0.5 bg-slate-100 text-slate-500 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md border border-slate-200">
                  Search in text
                </div> */}
+                    </div>
+                    <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
+                      Enter the unique name of your product. Make it descriptive
+                      and easy to remember for customers.
+                    </div>
                   </div>
-                  <div className="mt-1.5 xl:mt-3 text-xs leading-relaxed text-slate-500/80 dark:text-slate-400">
-                    Enter the unique name of your product. Make it descriptive
-                    and easy to remember for customers.
-                  </div>
+                </label>
+                <div className="flex-1 w-full mt-3 xl:mt-0">
+                  {/* <FormInput type="text" placeholder="Search your keyword here" /> */}
+                  <FormInput
+                    type="text"
+                    placeholder="Judge Name"
+                    className="w-full h-[40px]"
+                  />
+                  {/* <FormHelp>Maximum character 0/70</FormHelp> */}
                 </div>
-              </label>
-              <div className="flex-1 w-full mt-3 xl:mt-0">
-                {/* <FormInput type="text" placeholder="Search your keyword here" /> */}
-                <FormSelect className="py-3">
-                  <option value="monthly">Judge name</option>
-                  <option value="yearly">Yearly</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="daily">Daily</option>
-                </FormSelect>
-                {/* <FormHelp>Maximum character 0/70</FormHelp> */}
+              </div>
+              {/* Buttons */}
+              <div className="w-full max-w-[1050px] flex flex-wrap justify-end space-x-4 md:space-x-2 lg:space-x-4 mx-auto p-4">
+                <button
+                  type="reset"
+                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
+                  onClick={handleClearAll}
+                >
+                  Clear All
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+                  onClick={() => setShow(!show)}
+                >
+                  Search
+                </button>
               </div>
             </div>
-            {/* Buttons */}
-            <div className="w-full max-w-[1050px] flex flex-wrap justify-end space-x-4 md:space-x-2 lg:space-x-4 mx-auto p-4">
-              <button
-                type="reset"
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
-              >
-                Clear All
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
-                onClick={() => setShow(!show)}
-              >
-                Search
-              </button>
-            </div>
-          </div>
+          </form>
         </div>
       )}
       {show && (
         <>
           <div className="gap-4 bg-white mt-[-120px] position-relative">
-            <div className="bg-gray-400 w-full h-20 flex items-center">
-              <div className="ml-5">
+            <div className="bg-gray-100 w-full h-20 flex items-center">
+              <div className="ml-5 cursor-pointer">
                 {/* BEGIN: Breadcrumb */}
                 <Breadcrumb className="flex-1 hidden xl:block">
                   <Breadcrumb.Link
-                    className="dark:before:bg-chevron-black cursor-pointer"
+                    className="dark:before:bg-chevron-black"
                     to="/"
                   >
                     App
@@ -370,20 +380,26 @@ function Main() {
                 {/* END: Breadcrumb */}
                 {/* BEGIN: Search */}
               </div>
-              <div
+              {/* <div
                 className="relative justify-center flex-1 hidden xl:flex"
                 onClick={() => setQuickSearch(true)}
               >
-                <div className="mr-[200px] bg-black/[0.12] dark:bg-darkmode-900/30 dark:border-transparent border-transparent border w-[350px] flex items-center py-2 px-3.5 rounded-[0.5rem] text-white/60 cursor-pointer hover:bg-black/[0.15] transition-colors duration-300 hover:duration-100">
+                <div className="mr-[200px] cursor-pointer bg-black/[0.12] dark:bg-darkmode-900/30 dark:border-transparent border-transparent border w-[350px] flex items-center py-2 px-3.5 rounded-[0.5rem] text-white/60 cursor-pointer hover:bg-black/[0.15] transition-colors duration-300 hover:duration-100">
                   <Lucide icon="Search" className="w-[18px] h-[18px]" />
-                  <div className="ml-2.5 mr-auto">Quick search...</div>
+                  <input
+                    type="text"
+                    placeholder="Quick search..."
+                    className="ml-2.5 cursor-pointer mr-auto bg-transparent text-white/60 placeholder-white/60 border-none focus:outline-none"
+                    onChange={(e) => setSearchTerm(e.target.value)} // Add this to capture input
+                  />
                   <div>⌘K</div>
                 </div>
               </div>
               <QuickSearch
                 quickSearch={quickSearch}
                 setQuickSearch={setQuickSearch}
-              />
+              /> */}
+
               {/* END: Search */}
               {/* BEGIN: Notification & User Menu */}
               {/* <div className="flex items-center flex-1">
@@ -437,7 +453,7 @@ function Main() {
                 <div
                   role="button"
                   onClick={() => setnon(!non)}
-                  className="bg-white h-auto rounded-md shadow-md p-6 border border-gray-200 cursor-pointer"
+                  className="bg-white h-auto rounded-md shadow-md p-6 border border-gray-100 cursor-pointer"
                 >
                   {/* Title Section */}
                   <div className="flex justify-between mb-4">
@@ -494,15 +510,15 @@ function Main() {
                   </div>
 
                   {/* Buttons Section */}
-                  <div className="flex justify-between items-center">
-                  </div>
+                  <div className="flex justify-between items-center"></div>
                 </div>
               </div>
               <div className="mt-7 box h-auto box--stacked shadow-md">
-                <div 
-                 role="button"
-                 onClick={() => setnon(!non)}
-                className="bg-white h-auto rounded-md shadow-md p-6 border border-gray-200 cursor-pointer">
+                <div
+                  role="button"
+                  onClick={() => setnon(!non)}
+                  className="bg-white h-auto rounded-md shadow-md p-6 border border-gray-200 cursor-pointer"
+                >
                   {/* Title Section */}
                   <div className="flex justify-between mb-4">
                     <div>
@@ -577,10 +593,11 @@ function Main() {
                 </div>
               </div>
               <div className="mt-7 box h-auto box--stacked shadow-md">
-                <div 
-                 role="button"
-                 onClick={() => setnon(!non)}
-                className="bg-white h-auto rounded-md shadow-md p-6 border border-gray-200 cursor-pointer">
+                <div
+                  role="button"
+                  onClick={() => setnon(!non)}
+                  className="bg-white h-auto rounded-md shadow-md p-6 border border-gray-200 cursor-pointer"
+                >
                   {/* Title Section */}
                   <div className="flex justify-between mb-2">
                     <div>
@@ -660,7 +677,7 @@ function Main() {
           <div className="mt-[-900px] bg-gray-200 max-w-[1050px] m-auto gap-10">
             <div className="mt-3.5 box h-auto box--stacked">
               {/* Card Container */}
-              <div className="bg-white bg-gray-100 rounded-lg shadow-lg w-full p-6">
+              <div className="bg-white bg-gray-100 rounded-lg w-full p-6 shadow-[0_4px_6px_rgba(0,0,0,0.1),_0_1px_3px_rgba(0,0,0,0.08)]">
                 <div className="w-full bg-gray-100 rounded-lg flex items-center justify-between px-4 py-2 shadow-sm">
                   {/* Navigation Arrows and Current Page */}
                   <div className="flex items-center space-x-4">
@@ -736,7 +753,7 @@ function Main() {
                 {/* Header Section */}
                 <div className="flex bg-gray-100 rounded w-full justify-between items-start border-b pb-4">
                   {/* Case Information */}
-                  <div>
+                  <div className="pl-3">
                     <h1 className="text-lg font-semibold text-gray-800">
                       SUBRATA CHOUDHURY @ SANTOSH CHOUDHURY & ORS. vs. THE STATE
                       OF ASSAM & ANR.
@@ -758,7 +775,7 @@ function Main() {
                     </p>
                   </div>
                   {/* Download Button */}
-                  <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
+                  <button className="bg-blue-600 mr-2 text-white pr-5 px-6 py-2 rounded-md hover:bg-blue-700">
                     Download
                   </button>
                 </div>
