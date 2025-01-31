@@ -5,6 +5,7 @@ import activities from "@/fakers/activities";
 import users from "@/fakers/users";
 import _ from "lodash";
 
+
 interface MainProps {
   notificationsPanel: boolean;
   setNotificationsPanel: (val: boolean) => void;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "@/assets/logo_law.webp";
 import { Search, TrendingUp, History } from "lucide-react";
 import Lucide from "@/components/Base/Lucide";
@@ -12,9 +12,11 @@ import {
   InputGroup,
   FormHelp,
 } from "@/components/Base/Form";
+// import axios from 'axios'
 // import { ChevronDownIcon } from "lucide-react";
 
 function SearchComponent() {
+  const [userData, setData] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("All");
 
@@ -26,6 +28,18 @@ function SearchComponent() {
     setSelectedOption(option);
     setDropdownOpen(false); // Close dropdown after selection
   };
+
+  // useEffect(()=>{
+  //   axios.post("http://localhost:5001/authUser/register")
+  //   .then((response)=>{
+  //     console.log(response.data)
+  //     setData(response.data)
+  //   })
+  // })
+
+  
+
+
 
   return (
     <div className="flex justify-center pr-[220px] items-center pt-20 w-full px-4">
@@ -181,6 +195,7 @@ const Main = () => {
                     type="text"
                     placeholder="What are you looking for..."
                     className="w-full text-sm h-[40px] text-gray-700 px-4"
+                  
                   />
                 </div>
               </div>

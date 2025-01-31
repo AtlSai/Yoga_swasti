@@ -55,8 +55,8 @@ function Main() {
   return (
     <>
       {!show && (
-        <div className="p-5 mt-[-120px] border bg-white border-slate-200/60 dark:border-darkmode-400">
-          <div className=" items-center z-10 pb-5 text-[0.94rem] rounded-md font-medium border-b border-slate-200/60 dark:border-darkmode-400">
+        <div className="p-5 mt-[-130px] border bg-white border-slate-200/60 dark:border-darkmode-400">
+          <div className="fixed mt-[-10px] bg-white w-full items-center z-10 pb-5 text-[0.94rem] rounded-md font-medium border-b border-slate-200/60 dark:border-darkmode-400">
             <h1 className="text-2xl"> Find Judgement </h1>
             <div>
               {/* BEGIN: Breadcrumb */}
@@ -86,7 +86,7 @@ function Main() {
             </div>
           </div>
           <form ref={formRef}>
-            <div className="mt-5">
+            <div className="mt-[100px]">
               <div className="flex-col block pt-5 mt-5 xl:items-center sm:flex xl:flex-row first:mt-0 first:pt-0">
                 <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60 xl:mr-14">
                   <div className="text-left">
@@ -352,9 +352,11 @@ function Main() {
       )}
       {show && (
         <>
-          <div className="gap-4 bg-white mt-[-120px] position-relative">
-            <div className="bg-gray-100 w-full h-20 flex items-center">
-              <div className="ml-5 cursor-pointer">
+          <div className="gap-4 bg-white mt-[-120px]">
+            <div
+              className="
+  fixed z-10 h-[64px] w-full bg-gray-200 transition-[margin] duration-100  group-[.side-menu--collapsed]:xl:ml-[90px] top-0 bg-white shadow-md">
+              <div className="ml-5 mt-[20px] fixed w-full">
                 {/* BEGIN: Breadcrumb */}
                 <Breadcrumb className="flex-1 hidden xl:block">
                   <Breadcrumb.Link
@@ -446,14 +448,14 @@ function Main() {
               </div> */}
             </div>
             <div className="mt-[] max-w-[1130px] m-auto">
-              <div className="mt-3.5 box h-auto box--stacked shadow-md">
+              <div className=" box mt-[130px]  h-auto box--stacked shadow-md">
                 {/* <div className="bg-black w-full h-10">
 
               </div> */}
                 <div
                   role="button"
                   onClick={() => setnon(!non)}
-                  className="bg-white h-auto rounded-md shadow-md p-6 border border-gray-100 cursor-pointer"
+                  className="bg-white  h-auto rounded-md shadow-md p-6 border border-gray-100 cursor-pointer"
                 >
                   {/* Title Section */}
                   <div className="flex justify-between mb-4">

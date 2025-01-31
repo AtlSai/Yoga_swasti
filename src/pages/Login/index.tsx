@@ -7,114 +7,151 @@ import Lucide from "@/components/Base/Lucide";
 import clsx from "clsx";
 import _ from "lodash";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import { useState } from "react";
+import logo from "@/assets/logo_law.webp";
 
 function Main() {
+  const [show, setShow] = useState(false);
+  const [mobile, setMobile] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSignIn = () => {
+    if (!mobile.trim()) {
+      setError("Please enter your mobile number.");
+    } else {
+      setError(""); // Clear any previous error
+      console.log("Redirecting to sign-in page...");
+      // Redirect or handle sign-in logic here
+    }
+  };
+
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  
+  const handleChange = (index: number, value: string) => {
+    if (!/^\d?$/.test(value)) return;
+    let newOtp = [...otp];
+    newOtp[index] = value;  
+    setOtp(newOtp);
+  };
+
+  const handleSubmit = () => {
+    alert("Entered OTP: " + otp.join(""));
+  };
+
   return (
     <>
+    {!show && (
       <div className="container grid lg:h-screen grid-cols-12 lg:max-w-[1550px] 2xl:max-w-[1750px] py-10 px-5 sm:py-14 sm:px-10 md:px-36 lg:py-0 lg:pl-14 lg:pr-12 xl:px-24">
-        <div
-          className={clsx([
-            "relative z-50 h-full col-span-12 p-7 sm:p-14 bg-white rounded-2xl lg:bg-transparent lg:pr-10 lg:col-span-5 xl:pr-24 2xl:col-span-4 lg:p-0 dark:bg-darkmode-600",
-            "before:content-[''] before:absolute before:inset-0 before:-mb-3.5 before:bg-white/40 before:rounded-2xl before:mx-5 dark:before:hidden",
-          ])}
-        >
-          <div className="relative z-10 flex flex-col justify-center w-full h-full py-2 lg:py-32">
-            <div className="rounded-[0.8rem] w-[55px] h-[55px] border border-primary/30 flex items-center justify-center">
-              <div className="relative flex items-center justify-center w-[50px] rounded-[0.6rem] h-[50px] bg-gradient-to-b from-theme-1/90 to-theme-2/90 bg-white">
-                <div className="w-[26px] h-[26px] relative -rotate-45 [&_div]:bg-white">
-                  <div className="absolute w-[20%] left-0 inset-y-0 my-auto rounded-full opacity-50 h-[75%]"></div>
-                  <div className="absolute w-[20%] inset-0 m-auto h-[120%] rounded-full"></div>
-                  <div className="absolute w-[20%] right-0 inset-y-0 my-auto rounded-full opacity-50 h-[75%]"></div>
-                </div>
+      <div
+        className={clsx([
+          "relative z-50 h-full col-span-12 p-7 sm:p-14 bg-white rounded-2xl lg:bg-transparent lg:pr-10 lg:col-span-5 xl:pr-24 2xl:col-span-4 lg:p-0 dark:bg-darkmode-600",
+          "before:content-[''] before:absolute before:inset-0 before:-mb-3.5 before:bg-white/40 before:rounded-2xl before:mx-5 dark:before:hidden",
+        ])}
+      >
+        <div className="relative z-10 flex flex-col justify-center w-full h-full py-2 lg:py-32">
+          {/* <div className="rounded-[0.8rem] w-[55px] h-[55px] border border-primary/30 flex items-center justify-center">
+            <div className="relative flex items-center justify-center w-[50px] rounded-[0.6rem] h-[50px] bg-gradient-to-b from-theme-1/90 to-theme-2/90 bg-white">
+              <div className="w-[26px] h-[26px] relative -rotate-45 [&_div]:bg-white">
+                <div className="absolute w-[20%] left-0 inset-y-0 my-auto rounded-full opacity-50 h-[75%]"></div>
+                <div className="absolute w-[20%] inset-0 m-auto h-[120%] rounded-full"></div>
+                <div className="absolute w-[20%] right-0 inset-y-0 my-auto rounded-full opacity-50 h-[75%]"></div>
               </div>
             </div>
-            <div className="mt-10">
-              <div className="text-2xl font-medium">Sign In</div>
-              <div className="mt-2.5 text-slate-600 dark:text-slate-400">
-                Don't have an account?{" "}
-                <a className="font-medium text-primary" href="">
-                  Sign Up
-                </a>
-              </div>
-              <Alert
-                variant="outline-primary"
-                className="flex items-center px-4 py-3 my-7 bg-primary/5 border-primary/20 rounded-[0.6rem] leading-[1.7]"
-              >
-                {({ dismiss }) => (
-                  <>
-                    <div className="">
-                      <Lucide
-                        icon="Lightbulb"
-                        className="stroke-[0.8] w-7 h-7 mr-2 fill-primary/10"
-                      />
-                    </div>
-                    <div className="ml-1 mr-8">
-                      Welcome to <span className="font-medium">Tailwise</span>{" "}
-                      demo! Simply click{" "}
-                      <span className="font-medium">Sign In</span> to explore
-                      and access our documentation.
-                    </div>
-                    <Alert.DismissButton
-                      type="button"
-                      className="btn-close text-primary"
-                      onClick={dismiss}
-                      aria-label="Close"
-                    >
-                      <Lucide icon="X" className="w-5 h-5" />
-                    </Alert.DismissButton>
-                  </>
-                )}
-              </Alert>
-              <div className="mt-6">
-                <FormLabel>Email*</FormLabel>
-                <FormInput
-                  type="text"
-                  className="block px-4 py-3.5 rounded-[0.6rem] border-slate-300/80"
-                  placeholder={users.fakeUsers()[0].email}
-                />
-                <FormLabel className="mt-4">Password*</FormLabel>
-                <FormInput
-                  type="password"
-                  className="block px-4 py-3.5 rounded-[0.6rem] border-slate-300/80"
-                  placeholder="************"
-                />
-                <div className="flex mt-4 text-xs text-slate-500 sm:text-sm">
-                  <div className="flex items-center mr-auto">
-                    <FormCheck.Input
-                      id="remember-me"
-                      type="checkbox"
-                      className="mr-2.5 border"
+          </div> */}
+                <img
+            src={logo}
+            alt="Logo"
+            className="w-[60px] h-[60px] m-auto"
+          />
+          <div className="mt-10">
+            <div className="text-2xl font-medium">Sign In</div>
+            <div className="mt-2.5 text-slate-600 dark:text-slate-400">
+              Don't have an account?{" "}
+              <a className="font-medium text-primary" href="">
+                Sign Up
+              </a>
+            </div>
+            <Alert
+              variant="outline-primary"
+              className="flex items-center px-4 py-3 my-7 bg-primary/5 border-primary/20 rounded-[0.6rem] leading-[1.7]"
+            >
+              {({ dismiss }) => (
+                <>
+                  <div className="">
+                    <Lucide
+                      icon="Lightbulb"
+                      className="stroke-[0.8] w-7 h-7 mr-2 fill-primary/10"
                     />
-                    <label
-                      className="cursor-pointer select-none"
-                      htmlFor="remember-me"
-                    >
-                      Remember me
-                    </label>
                   </div>
-                  <a href="">Forgot Password?</a>
-                </div>
-                <div className="mt-5 text-center xl:mt-8 xl:text-left">
-                  <Button
-                    variant="primary"
-                    rounded
-                    className="bg-gradient-to-r from-theme-1/70 to-theme-2/70 w-full py-3.5 xl:mr-3 dark:border-darkmode-400"
+                  <div className="ml-1 mr-8">
+                    Welcome to <span className="font-medium">Tailwise</span>{" "}
+                    demo! Simply click{" "}
+                    <span className="font-medium">Sign In</span> to explore and access our documentation.
+                  </div>
+                  <Alert.DismissButton
+                    type="button"
+                    className="btn-close text-primary"
+                    onClick={dismiss}
+                    aria-label="Close"
                   >
-                    Sign In
-                  </Button>
-                  <Button
-                    variant="outline-secondary"
-                    rounded
-                    className="bg-white/70 w-full py-3.5 mt-3 dark:bg-darkmode-400"
+                    <Lucide icon="X" className="w-5 h-5" />
+                  </Alert.DismissButton>
+                </>
+              )}
+            </Alert>
+            <div className="mt-6">
+              <FormLabel>Mobile*</FormLabel>
+              <FormInput
+                type="text"
+                className="block px-4 py-3.5 rounded-[0.6rem] border-slate-300/80"
+                placeholder="Enter your mobile"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+              />
+              {/* Error Message */}
+              {error && <p className="text-red-500 mt-2">{error}</p>}
+
+              <div className="flex mt-4 text-xs text-slate-500 sm:text-sm">
+                <div className="flex items-center mr-auto">
+                  <FormCheck.Input
+                    id="remember-me"
+                    type="checkbox"
+                    className="mr-2.5 border"
+                  />
+                  <label
+                    className="cursor-pointer select-none"
+                    htmlFor="remember-me"
                   >
-                    Sign Up
-                  </Button>
+                    Remember me
+                  </label>
                 </div>
+              </div>
+
+              <div className="mt-5 text-center xl:mt-8 xl:text-left">
+                <Button
+                  variant="primary"
+                  rounded
+                  className="bg-gradient-to-r from-theme-1/70 to-theme-2/70 w-full py-3.5 xl:mr-3 dark:border-darkmode-400"
+                  onClick={handleSignIn}
+                  disabled={!mobile} // Button is disabled if mobile is empty
+                  onClick={() => setShow(!show)}
+                >
+                  Sign In
+                </Button>
+                <Button
+                  variant="outline-secondary"
+                  rounded
+                  className="bg-white/70 w-full py-3.5 mt-3 dark:bg-darkmode-400"
+                >
+                  Sign Up
+                </Button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    )}
       <div className="fixed container grid w-screen inset-0 h-screen grid-cols-12 lg:max-w-[1550px] 2xl:max-w-[1750px] pl-14 pr-12 xl:px-24">
         <div
           className={clsx([
@@ -187,6 +224,43 @@ function Main() {
         </div>
       </div>
       <ThemeSwitcher />
+      {show && (
+      <div className="container grid lg:h-screen grid-cols-12 mt-[100px] lg:max-w-[1550px] 2xl:max-w-[1750px] py-10 px-5 sm:py-14 sm:px-10 md:px-36 lg:py-0 lg:pl-14 lg:pr-12 xl:px-24">
+      <div
+      className={clsx([
+        "relative z-50 h-full col-span-12 p-7 sm:p-14 bg-white rounded-2xl lg:bg-transparent lg:pr-10 lg:col-span-5 xl:pr-24 2xl:col-span-4 lg:p-0 dark:bg-darkmode-600",
+      ])}
+    >
+      <div className="relative z-10 flex flex-col justify-center w-full h-full py-2 lg:py-32">
+        <div className="text-2xl font-medium text-center">Verify OTP</div>
+        <div className="mt-2.5 text-slate-600 dark:text-slate-400 text-center">
+          Enter the 4-digit code sent to your mobile
+        </div>
+        <div className="flex justify-center mt-5 space-x-3">
+          {otp.map((digit, index) => (
+            <input
+            title="otp"
+              key={index}
+              type="text"
+              maxLength={1}
+              className="w-12 h-12 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              value={digit}
+              onChange={(e) => handleChange(index, e.target.value)}
+            />
+          ))}
+        </div>
+        <div className="mt-5 text-center xl:mt-8">
+          <button
+            onClick={handleSubmit}
+            className="w-full py-3.5 text-white bg-gradient-to-r from-theme-1/70 to-theme-2/70 rounded-md"
+          >
+            Verify OTP
+          </button>
+        </div>
+      </div>
+    </div>
+      </div>
+      )}
     </>
   );
 }

@@ -15,6 +15,7 @@ export interface SideMenuState {
   menu: Array<Menu | string>;
 }
 
+
 const initialState: SideMenuState = {
   menu: [
     {
@@ -282,17 +283,17 @@ const initialState: SideMenuState = {
     //   pathname: "/reviews",
     //   title: "Reviews",
     // },
-    // "AUTHENTICATIONS",
-    // {
-    //   icon: "BookKey",
-    //   pathname: "login",
-    //   title: "Login",
-    // },
-    // {
-    //   icon: "BookLock",
-    //   pathname: "register",
-    //   title: "Register",
-    // },
+    "AUTHENTICATIONS",
+    {
+      icon: "BookKey",
+      pathname: "login",
+      title: "Login",
+    },
+    {
+      icon: "BookLock",
+      pathname: "register",
+      title: "Register",
+    },
     // "COMPONENTS",
     // {
     //   icon: "LayoutPanelLeft",

@@ -488,7 +488,7 @@ function Main() {
                       setActivitiesPanel(true);
                     }}
                   >
-                    {/* <Lucide icon="LayoutGrid" className="w-[18px] h-[18px]" /> */}
+                    {/* <Lucide icon="LayoutGrid" className="w-[18px] h-[18px] text-black" /> */}
                   </a>
                   <a
                     href=""
@@ -498,26 +498,27 @@ function Main() {
                       requestFullscreen();
                     }}
                   >
-                    {/* <Lucide icon="Expand" className="w-[18px] h-[18px]" /> */}
+                    {/* <Lucide icon="Expand" className="w-[18px] h-[18px] text-black" /> */}
                   </a>
                   <div className="z-10 flex items-center">
                     {/* Search Icon */}
                     <button
                       title="go"
                       onClick={() => setIsOpen(!isOpen)}
-                      className="p-2 rounded text-white rounded-full hover:bg-white/5"
+                      className="p-2 rounded text-black rounded-full hover:bg-black/5"
                     >
-                       {!isOpen && (
-                      <Search className="w-6 h-6 text-white dark:text-gray-200" />
-                      )}
+                      {!isOpen && <Search className="w-6 h-6 text-black" />}
                     </button>
 
                     {/* Search Bar */}
                     {isOpen && (
                       <div className="relative w-64">
                         {/* Search Icon */}
-                        <div className="bg-white/[0.12] dark:bg-darkmode-900/30 dark:border-transparent border-transparent border w-[260px] flex items-center py-2 px-3.5 rounded-[0.5rem] text-white/60 cursor-pointer hover:bg-white/[0.15] transition-colors duration-300 hover:duration-100">
-                          <Lucide icon="Search" className="w-[18px] h-[18px]" />
+                        <div className="bg-white/[0.12] dark:bg-darkmode-900/30 dark:border-transparent border-transparent border w-[260px] flex items-center py-2 px-3.5 rounded-[0.5rem] text-black cursor-pointer hover:bg-white/[0.15] transition-colors duration-300 hover:duration-100">
+                          <Lucide
+                            icon="Search"
+                            className="w-[18px] h-[18px] text-black"
+                          />
                           <div className="ml-2.5 mr-auto">Quick search...</div>
                         </div>
                       </div>
@@ -525,26 +526,30 @@ function Main() {
                   </div>
                   <button
                     onClick={toggleDarkMode}
-                    className="flex items-center z-10 justify-center p-1.5 text-white rounded-full hover:bg-white/5"
+                    className="flex items-center z-10 justify-center p-1.5 text-black rounded-full hover:bg-black/5"
                   >
                     {darkMode ? (
-                      <Sun className="w-6 h-6 text-white" />
+                      <Sun className="w-6 h-6 text-black" />
                     ) : (
-                      <Moon className="w-6 h-6 text-white" />
+                      <Moon className="w-6 h-6 text-black" />
                     )}
                     <span className="">{darkMode ? "" : ""}</span>
                   </button>
                   <a
                     href=""
-                    className="p-2 text-white rounded-full hover:bg-white/5"
+                    className="p-2 text-black rounded-full hover:bg-black/5"
                     onClick={(e) => {
                       e.preventDefault();
                       setNotificationsPanel(true);
                     }}
                   >
-                    <Lucide icon="Bell" className="stroke-[2px] w-6 h-6" />
+                    <Lucide
+                      icon="Bell"
+                      className="stroke-[2px] w-6 h-6 text-black"
+                    />
                   </a>
                 </div>
+
                 <Menu className="ml-5">
                   <Menu.Button className="overflow-hidden rounded-full w-[36px] h-[36px] border-[3px] border-black/[0.15] image-fit mr-5">
                     <img

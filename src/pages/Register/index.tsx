@@ -5,10 +5,48 @@ import Button from "@/components/Base/Button";
 import clsx from "clsx";
 import _ from "lodash";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import axios from 'axios';
+import { useState } from 'react'
+import logo from "@/assets/logo_law.webp";
+// const [mobile] = useState("");
 
 function Main() {
+  const [mobile, setMobile] = useState("");
+  const [show, setShow] = useState(false);
+
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  
+  const handleChange = (index: number, value: string) => {
+    if (!/^\d?$/.test(value)) return;
+    let newOtp = [...otp];
+    newOtp[index] = value;  
+    setOtp(newOtp);
+  };
+
+  const handleSubmit = () => {
+    alert("Entered OTP: " + otp.join(""));
+  };
+
+  const data = { name: "", email: "", mobileNumber: "" };
+    const [inputData, setInputData] = useState(data);
+
+    const handleData = ({ target: { name, value } }) => {
+        setInputData(prevState => ({ ...prevState, [name]: value }));
+    };
+
+    const handleSignIn = () => {
+      console.log("inputData", inputData)
+        axios.post("http://localhost:5001/authUser/register", inputData)
+            .then(({ data }) => {
+              
+              console.log("api response: ",data)
+            });
+    };
+
+
   return (
     <>
+    {!show && (
       <div className="container grid lg:h-screen grid-cols-12 lg:max-w-[1550px] 2xl:max-w-[1750px] py-10 px-5 sm:py-14 sm:px-10 md:px-36 lg:py-0 lg:pl-14 lg:pr-12 xl:px-24">
         <div
           className={clsx([
@@ -17,15 +55,20 @@ function Main() {
           ])}
         >
           <div className="relative z-10 flex flex-col justify-center w-full h-full py-2 lg:py-32">
-            <div className="rounded-[0.8rem] w-[55px] h-[55px] border border-primary/30 flex items-center justify-center">
-              <div className="relative flex items-center justify-center w-[50px] rounded-[0.6rem] h-[50px] bg-gradient-to-b from-theme-1/90 to-theme-2/90 bg-white">
+            {/* <div className="rounded-[0.8rem] w-[55px] h-[55px] border border-primary/30 flex items-center justify-center"> */}
+              {/* <div className="relative flex items-center justify-center w-[50px] rounded-[0.6rem] h-[50px] bg-gradient-to-b from-theme-1/90 to-theme-2/90 bg-white">
                 <div className="w-[26px] h-[26px] relative -rotate-45 [&_div]:bg-white">
                   <div className="absolute w-[20%] left-0 inset-y-0 my-auto rounded-full opacity-50 h-[75%]"></div>
                   <div className="absolute w-[20%] inset-0 m-auto h-[120%] rounded-full"></div>
                   <div className="absolute w-[20%] right-0 inset-y-0 my-auto rounded-full opacity-50 h-[75%]"></div>
                 </div>
-              </div>
-            </div>
+              </div> */}
+                 <img
+            src={logo}
+            alt="Logo"
+            className="w-[60px] h-[60px] m-auto"
+          />
+            {/* </div> */}
             <div className="mt-10">
               <div className="text-2xl font-medium">Register</div>
               <div className="mt-2.5 text-slate-600 dark:text-slate-400">
@@ -35,48 +78,66 @@ function Main() {
                 </a>
               </div>
               <div className="mt-6">
-                <FormLabel>First Name*</FormLabel>
+                <FormLabel>Name*</FormLabel>
                 <FormInput
                   type="text"
                   className="block px-4 py-3.5 rounded-[0.6rem] border-slate-300/80"
-                  placeholder={users.fakeUsers()[0].name.split(" ")[0]}
+                  // placeholder={users.fakeUsers()[0].name.split(" ")[0]}
+                  name='name'
+                  value={inputData.name} onChange={handleData}
                 />
-                <FormLabel className="mt-5">Last Name*</FormLabel>
+                {/* <FormLabel className="mt-5">*</FormLabel>
                 <FormInput
                   type="text"
                   className="block px-4 py-3.5 rounded-[0.6rem] border-slate-300/80"
                   placeholder={users.fakeUsers()[0].name.split(" ")[1]}
-                />
+                  name="lastname"
+                  value={inputData.lastname} onChange={handleData}
+                /> */}
                 <FormLabel className="mt-5">Email*</FormLabel>
                 <FormInput
                   type="text"
                   className="block px-4 py-3.5 rounded-[0.6rem] border-slate-300/80"
-                  placeholder={users.fakeUsers()[0].email}
+                  // placeholder={users.fakeUsers()[0].email}
+                  name="email"
+                  value={inputData.email} onChange={handleData}
                 />
-                <FormLabel className="mt-5">Password*</FormLabel>
+                <FormLabel className="mt-5">Mobile*</FormLabel>
+                <FormInput
+                  type="text"
+                  className="block px-4 py-3.5 rounded-[0.6rem] border-slate-300/80"
+                  // placeholder={users.fakeUsers()[0].email}
+                  name="mobileNumber"
+                  value={inputData.mobileNumber} onChange={handleData}
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                />
+                {/* <FormLabel className="mt-5">Password*</FormLabel>
                 <FormInput
                   type="password"
                   className="block px-4 py-3.5 rounded-[0.6rem] border-slate-300/80"
                   placeholder="************"
-                />
-                <div className="grid w-full h-1.5 grid-cols-12 gap-4 mt-3.5">
+                  name="password"
+                  value={inputData.password} onChange={handleData}
+                /> */}
+                {/* <div className="grid w-full h-1.5 grid-cols-12 gap-4 mt-3.5">
                   <div className="h-full col-span-3 border rounded active bg-slate-400/30 border-slate-400/20 [&.active]:bg-theme-1/30 [&.active]:border-theme-1/20"></div>
                   <div className="h-full col-span-3 border rounded active bg-slate-400/30 border-slate-400/20 [&.active]:bg-theme-1/30 [&.active]:border-theme-1/20"></div>
                   <div className="h-full col-span-3 border rounded active bg-slate-400/30 border-slate-400/20 [&.active]:bg-theme-1/30 [&.active]:border-theme-1/20"></div>
                   <div className="h-full col-span-3 border rounded bg-slate-400/30 border-slate-400/20 [&.active]:bg-theme-1/30 [&.active]:border-theme-1/20"></div>
-                </div>
-                <a
+                </div> */}
+                {/* <a
                   href=""
                   className="block mt-3 text-xs text-slate-500/80 sm:text-sm dark:text-slate-400"
                 >
                   What is a secure password?
-                </a>
-                <FormLabel className="mt-5">Password Confirmation*</FormLabel>
+                </a> */}
+                {/* <FormLabel className="mt-5">Password Confirmation*</FormLabel>
                 <FormInput
                   type="password"
                   className="block px-4 py-3.5 rounded-[0.6rem] border-slate-300/80"
                   placeholder="************"
-                />
+                /> */}
                 <div className="flex items-center mt-5 text-xs text-slate-500 sm:text-sm">
                   <FormCheck.Input
                     id="remember-me"
@@ -99,6 +160,9 @@ function Main() {
                     variant="primary"
                     rounded
                     className="bg-gradient-to-r from-theme-1/70 to-theme-2/70 w-full py-3.5 xl:mr-3 dark:border-darkmode-400"
+                    onClick={handleSignIn}
+                    disabled={!mobile} // Button is disabled if mobile is empty
+                    onClick={() => setShow(!show)}
                   >
                     Sign In
                   </Button>
@@ -115,6 +179,7 @@ function Main() {
           </div>
         </div>
       </div>
+    )}
       <div className="fixed container grid w-screen inset-0 h-screen grid-cols-12 lg:max-w-[1550px] 2xl:max-w-[1750px] pl-14 pr-12 xl:px-24">
         <div
           className={clsx([
@@ -187,6 +252,43 @@ function Main() {
         </div>
       </div>
       <ThemeSwitcher />
+      {show && (
+      <div className="container grid lg:h-screen grid-cols-12 mt-[100px] lg:max-w-[1550px] 2xl:max-w-[1750px] py-10 px-5 sm:py-14 sm:px-10 md:px-36 lg:py-0 lg:pl-14 lg:pr-12 xl:px-24">
+            <div
+            className={clsx([
+              "relative z-50 h-full col-span-12 p-7 sm:p-14 bg-white rounded-2xl lg:bg-transparent lg:pr-10 lg:col-span-5 xl:pr-24 2xl:col-span-4 lg:p-0 dark:bg-darkmode-600",
+            ])}
+          >
+            <div className="relative z-10 flex flex-col justify-center w-full h-full py-2 lg:py-32">
+              <div className="text-2xl font-medium text-center">Verify OTP</div>
+              <div className="mt-2.5 text-slate-600 dark:text-slate-400 text-center">
+                Enter the 4-digit code sent to your mobile
+              </div>
+              <div className="flex justify-center mt-5 space-x-3">
+                {otp.map((digit, index) => (
+                  <input
+                  title="otp"
+                    key={index}
+                    type="text"
+                    maxLength={1}
+                    className="w-12 h-12 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    value={digit}
+                    onChange={(e) => handleChange(index, e.target.value)}
+                  />
+                ))}
+              </div>
+              <div className="mt-5 text-center xl:mt-8">
+                <button
+                  onClick={handleSubmit}
+                  className="w-full py-3.5 text-white bg-gradient-to-r from-theme-1/70 to-theme-2/70 rounded-md"
+                >
+                  Verify OTP
+                </button>
+              </div>
+            </div>
+          </div>
+            </div>
+      )}
     </>
   );
 }
