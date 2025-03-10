@@ -1990,13 +1990,16 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import Vector from "../../assets/Vector9.png";
 import Logo from "../../assets/White Logo 1.png";
-import Imageback from "../../assets/leaf.jpg";
+// import Imageback from "../../assets/leaf.jpg";
 import Maain from "../../assets/maain.png";
 import Image1 from "../../assets/zero.png";
 import Image2 from "../../assets/document.png";
 import Image3 from "../../assets/arrow.png";
 import Image4 from "../../assets/hand.png";
 import Right from "../../assets/right2.png";
+import Video1 from "../../assets/video1.gif";
+import Video2 from "../../assets/video2.gif";
+import Video3 from "../../assets/video3.gif";
 
 const images = [Vector, Vector, Vector, Vector, Vector, Vector, Vector, Vector];
 function Main() {
@@ -2079,6 +2082,21 @@ function Main() {
       setShowcaseActive(true);
     }
   };
+
+  const mediaFiles = [
+    {
+      type: "video",
+      src: Video1,
+    },
+    {
+      type: "video",
+      src: Video2,
+    },
+    {
+      type: "image",
+      src: Video3,
+    },
+  ];
 
   const [groups, setGroups] = useState<
     Array<{
@@ -2537,7 +2555,7 @@ function Main() {
         {/* <div className="container relative z-10 pt-40">
           <div className="flex flex-col items-center "> */}
         <div className="container relative z-10 pt-40 flex items-center justify-center">
-          <div className="flex flex-col items-center w-full">
+          <div className="flex w-[100%] flex-col items-center w-full">
             <div className="container h-[70vh]  mx-auto flex flex-col md:flex-row items-center justify-center px-10 sm:px-6 md:px-10 lg:px-16 xl:px-28">
               {/* Left Side - Text Content */}
               <div className="w-full md:w-5/12 lg:w-6/12 xl:w-6/12 text-center md:text-left flex flex-col items-center md:items-start justify-center">
@@ -2571,38 +2589,42 @@ function Main() {
                 <img
                   src={Maain}
                   alt="Yoga Instructor"
-                  className="w-[767px] h-[430px] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl object-contain"
+                  className="w-[767px] h-[230px] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl object-contain"
                 />
               </div>
             </div>
-            <section className="w-full bg-white min-h-[130vh] flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-20">
-              <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 place-items-center">
-                  {[
-                    "https://images.unsplash.com/photo-1573384666979-2b1e160d2d08?q=80&w=3039&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    "https://images.unsplash.com/photo-1591343395902-1adcb454c4e2?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    "https://news.dasa.ncsu.edu/wp-content/uploads/sites/39/2019/08/Shaily-Article-Photo.png",
-                  ].map((image, index) => (
+            <section className="w-full bg-white h-auto flex flex-wrap items-center justify-center py-10 px-2 sm:px-4 md:px-6 lg:px-12">
+              <div className="w-[100%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                {/* Image Grid */}
+                <div className="grid flex-wrap grid-cols-1 sm:grid-cols-2 gap-4 place-items-center">
+                  {mediaFiles.map((media, index) => (
                     <div
                       key={index}
-                      className={`w-full sm:w-[270px] h-[200px] bg-white rounded-xl shadow-lg p-2 flex justify-center items-center ${
+                      className={`w-full min-w-[290px] sm:w-[270px] h-[200px] bg-white rounded-xl shadow-lg p-2 flex justify-center items-center ${
                         index === 0 ? "sm:col-span-2" : ""
                       }`}
                     >
-                      <div
-                        className="w-full h-full bg-gray-50 rounded-lg border border-purple-800 bg-cover bg-center"
-                        style={{ backgroundImage: `url('${image}')` }}
-                      ></div>
+                      <div className="w-full h-full bg-gray-50 rounded-lg border border-purple-800 flex justify-center items-center overflow-hidden">
+                        <video
+                          className="w-full h-full object-cover rounded-lg"
+                          autoPlay
+                          loop
+                          muted
+                        >
+                          <source src={media.src} type="video/mp4" />
+                        </video>
+                      </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="text-center md:text-left px-4 sm:px-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold">
+                {/* Text Section */}
+                <div className="text-center md:text-left h-auto px-2 sm:px-4">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">
                     Select your preferred format to offer yoga classes – choose
                     from these three options!
                   </h2>
-                  <p className="text-gray-600 mt-3 text-base sm:text-lg">
+                  <p className="text-gray-600 mt-3 text-sm sm:text-base md:text-lg">
                     Join <span className="font-semibold">Swasti Bharat</span> to
                     attract more students, receive secure payments, and build
                     your credibility with verified badges and real-time updates.
@@ -2610,66 +2632,71 @@ function Main() {
                 </div>
               </div>
             </section>
-            <section className="w-full min-h-screen flex items-center justify-center md:px-12 lg:px-20 xl:px-0 md:pr-20 bg-[rgba(255, 231, 254, 0.40)]">
-              <div className="max-w-6xl flex-wrap mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                {/* <!-- Left Content --> */}
-                <div className="text-center md:text-left px-4 w-[90%] md:px-0">
-                  <h2 className="text-[#111] font-['Public_Sans'] text-2xl md:text-3xl font-semibold leading-[48px]">
-                    Get Recognized, Earn More,{" "}
-                    <br className="hidden md:block" /> and Teach Effortlessly!
-                  </h2>
-                  <p className="text-[#111] font-['Public_Sans'] text-sm font-light leading-[26px]">
-                    Join <span className="font-semibold">Swasti Bharat</span> to
-                    attract more students, receive secure payments, and build
-                    your credibility with verified badges and real-time updates.
-                  </p>
-                </div>
 
-                {/* <!-- Right Grid Layout --> */}
-                <div className="grid flex-wrap grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10 relative md:pr-24">
-                  {/* <!-- Left Column --> */}
-                  <div className="flex flex-col gap-3 mt-[-20px] md:mt-[-50px]">
-                    <div className="w-full sm:w-[238px] h-auto p-5 bg-white rounded-2xl shadow-md flex flex-col justify-center">
-                      <h3 className="text-black font-['Public_Sans'] text-base md:text-lg font-semibold leading-7">
-                        Verified Instructor Badge
-                      </h3>
-                      <p className="text-[#3B3B3B] font-poppins text-sm font-normal leading-6">
-                        Build trust and attract more students.
-                      </p>
-                    </div>
-                    <div className="w-full sm:w-[238px] h-auto p-5 bg-white rounded-2xl shadow-md flex flex-col justify-center">
-                      <h3 className="text-black font-['Public_Sans'] text-base md:text-lg font-semibold leading-7">
-                        Real-Time Notifications
-                      </h3>
-                      <p className="text-[#3B3B3B] font-poppins text-sm font-normal leading-6">
-                        Instant alerts for bookings, payments, and messages.
-                      </p>
-                    </div>
+            <section className="w-full bg-white min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-20 xl:px-0 md:pr-20">
+              <div className="w-full h-auto bg-[#FFE7FE] px-4 sm:px-6 md:px-12 py-12 flex justify-center">
+                <div className="w-full max-w-6xl grid grid-cols-1 xl:grid-cols-2 items-center gap-10">
+                  {/* Left Content */}
+                  <div className="text-center w-full md:w-[85%] md:text-left px-2 md:px-0">
+                    <h2 className="text-[#111] font-['Public_Sans'] text-xl sm:text-2xl md:text-3xl font-semibold leading-[32px] sm:leading-[40px] md:leading-[48px]">
+                      Get Recognized, Earn More,{" "}
+                      <br className="hidden md:block" /> and Teach Effortlessly!
+                    </h2>
+                    <p className="text-[#111] font-['Public_Sans'] text-sm sm:text-base font-light leading-[22px] sm:leading-[26px] mt-4">
+                      Join <span className="font-semibold">Swasti Bharat</span>{" "}
+                      to attract more students, receive secure payments, and
+                      build your credibility with verified badges and real-time
+                      updates.
+                    </p>
                   </div>
 
-                  {/* <!-- Right Column --> */}
-                  <div className="flex flex-col gap-3 relative mt-[30px] md:mt-[70px]">
-                    <div className="w-full sm:w-[314px] h-auto p-5 bg-white rounded-2xl shadow-md flex flex-col justify-center">
-                      <h3 className="text-black font-['Public_Sans'] text-base md:text-lg font-semibold leading-7">
-                        Zero Investment, Maximum Earnings
-                      </h3>
-                      <p className="text-[#3B3B3B] font-poppins text-sm font-normal leading-6">
-                        Secure, timely payouts with zero hidden charges.
-                      </p>
+                  {/* Right Grid Layout */}
+                  <div className="grid grid-cols-1  md:grid-cols-2 gap-5 sm:gap-8">
+                    {/* Left Column */}
+                    <div className="flex flex-col lg:mt-[-120px] max-lg:mt-0 gap-7">
+                      <div className="w-full w-[250px] md:w-[100%] h-[193px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
+                        <h3 className="text-black font-['Public_Sans'] text-lg font-semibold leading-7">
+                          Verified Instructor Badge
+                        </h3>
+                        <p className="text-[#3B3B3B] font-['Poppins'] text-sm font-normal leading-6">
+                          Build trust and attract more students.
+                        </p>
+                      </div>
+                      <div className="w-full w-[250px] md:w-[100%] h-[193px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
+                        <h3 className="text-black font-['Public_Sans'] text-lg font-semibold leading-7">
+                          Real-Time Notifications
+                        </h3>
+                        <p className="text-[#3B3B3B] font-['Poppins'] text-sm font-normal leading-6">
+                          Instant alerts for bookings, payments, and messages.
+                        </p>
+                      </div>
                     </div>
-                    <div className="w-full sm:w-[238px] h-auto p-5 bg-white rounded-2xl shadow-md flex flex-col justify-center">
-                      <h3 className="text-black font-['Public_Sans'] text-base md:text-lg font-semibold leading-7">
-                        Location-Based Bookings
-                      </h3>
-                      <p className="text-[#3B3B3B] font-poppins text-sm font-normal leading-6">
-                        Get students near your area for home sessions.
-                      </p>
+
+                    {/* Right Column */}
+                    <div className="flex flex-col gap-7">
+                      <div className="w-full w-[316px] md:w-[100%] h-[169px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
+                        <h3 className="text-black font-['Public_Sans'] text-lg font-semibold leading-7">
+                          Zero Investment, Maximum Earnings
+                        </h3>
+                        <p className="text-[#3B3B3B] font-['Poppins'] text-sm font-normal leading-6">
+                          Secure, timely payouts with zero hidden charges.
+                        </p>
+                      </div>
+                      <div className="w-full w-[200px] md:w-[100%] h-[169px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
+                        <h3 className="text-black font-['Public_Sans'] text-lg font-semibold leading-7">
+                          Location-Based Bookings
+                        </h3>
+                        <p className="text-[#3B3B3B] font-['Poppins'] text-sm font-normal leading-6">
+                          Nearby student sessions.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
-            <div className="container mx-auto px-14 py-8">
+
+            <div className="container bg-white mx-auto px-14 py-8">
               <div className="flex flex-col gap-10 md:flex-row items-start md:items-center">
                 {/* Left Side - Title and Description */}
                 <div className="md:w-1/2 mb-8 md:mb-0">
@@ -2829,7 +2856,7 @@ function Main() {
                   </div>
 
                   {/* Quick Links */}
-                  <div className="flex flex-col items-center md:items-start">
+                  <div className="flex flex-col md:items-start">
                     <h2 className="font-[16px] mb-4 text-white">Quick Link</h2>
                     <ul className="space-y-2">
                       {["Home", "About Us", "Services", "Product"].map(
@@ -2852,7 +2879,7 @@ function Main() {
                   </div>
 
                   {/* Policy */}
-                  <div className="flex flex-col items-center md:items-start">
+                  <div className="flex flex-col md:items-start">
                     <h2 className="font-[16px] mb-4 text-white">Policy</h2>
                     <ul className="space-y-2">
                       {[1, 2].map((item, index) => (
@@ -2874,8 +2901,10 @@ function Main() {
                   </div>
 
                   {/* Contact */}
-                  <div className="flex flex-col items-center md:items-start">
-                    <h2 className="font-[16px] mb-4 text-white">Contact</h2>
+                  <div className="flex flex-col md:items-start">
+                    <h2 className="font-[16px] mb-4 text-start text-white">
+                      Contact
+                    </h2>
                     <ul className="space-y-2">
                       <li className="flex items-center space-x-2">
                         <FontAwesomeIcon
@@ -2929,15 +2958,6 @@ function Main() {
                         alt={`Sample ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
-
-                      {/* Overlay Image on the Last Image */}
-                      {index === images.length - 1 && (
-                        <img
-                          src={Imageback}
-                          alt="Overlay"
-                          className="absolute top-0 left-0 w-full h-full object-cover opacity-50"
-                        />
-                      )}
                     </div>
                   ))}
                 </div>
