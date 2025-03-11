@@ -1949,10 +1949,10 @@
 // }
 
 // export default Main;
-
+// import { useState } from "react";
 import "@/assets/css/pages/landing-page.css";
 import Lucide, { icons } from "@/components/Base/Lucide";
-import { Menu } from "@/components/Base/Headless";
+// import { Menu } from "@/components/Base/Headless";
 import { FormInput, FormTextarea } from "@/components/Base/Form";
 import {
   setColorScheme,
@@ -2000,6 +2000,7 @@ import Right from "../../assets/right2.png";
 import Video1 from "../../assets/video1.gif";
 import Video2 from "../../assets/video2.gif";
 import Video3 from "../../assets/video3.gif";
+import { Menu, X } from "lucide-react";
 
 const images = [Vector, Vector, Vector, Vector, Vector, Vector, Vector, Vector];
 function Main() {
@@ -2011,6 +2012,7 @@ function Main() {
   const activeColorScheme = useAppSelector(selectColorScheme);
   const [tempActiveColorScheme, setTempActiveColorScheme] =
     useState(activeColorScheme);
+  const [isOpen, setIsOpen] = useState(false);
 
   const setColorSchemeClass = () => {
     const el = document.querySelectorAll("html")[0];
@@ -2085,11 +2087,11 @@ function Main() {
 
   const mediaFiles = [
     {
-      type: "video",
+      type: "image",
       src: Video1,
     },
     {
-      type: "video",
+      type: "image",
       src: Video2,
     },
     {
@@ -2436,27 +2438,10 @@ function Main() {
         ])}
       >
         <div className="container fixed inset-x-0 z-50 px-5 mx-auto xl:px-0">
-          <div
-            className={clsx([
-              "relative flex items-center h-16 w-full mt-5 px-5",
-              "before:content-[''] before:inset-0 before:box before:absolute before:opacity-0 before:border-0 before:bg-gradient-to-r before:from-[#4F0A39] before:to-[#89346E] before:rounded-xl",
-              "group-[.background--hidden]:before:opacity-100",
-              "after:content-[''] after:z-[-1] after:inset-x-4 after:shadow-sm after:opacity-0 after:h-full after:bg-primary/5 after:border after:border-[#89346E] after:absolute after:rounded-lg after:mx-auto after:top-0 after:mt-3 after:dark:bg-darkmode-600/70 after:dark:border-darkmode-500/60",
-              "group-[.background--hidden]:after:opacity-100",
-            ])}
-          >
-            <a
-              className="relative mt-[40px] z-10 flex items-center lg:mr-14"
-              href=""
-            >
-              <div className="bg-[#82396b] mb-[20px] text-white p-4 rounded-lg flex items-center space-x-4">
-                <img
-                  alt="Decorative image of a meditating figure"
-                  className="h-12 w-12"
-                  height="50"
-                  src={Logo}
-                  width="50"
-                />
+          <div className="relative flex items-center h-16 w-full px-5 mt-5">
+            <a href="/" className="relative z-10 flex items-center">
+              <div className="bg-[#82396b] text-white p-4 rounded-lg flex items-center space-x-4">
+                <img src={Logo} alt="Logo" className="h-12 w-12" />
                 <div>
                   <p className="text-orange-400">
                     Swasth Bharat <span className="text-white">with</span>
@@ -2465,90 +2450,64 @@ function Main() {
                 </div>
               </div>
             </a>
-            <div
-              className={clsx([
-                "main-menu [&.main-menu--show]:flex hidden fixed inset-0 md:flex flex-col items-center justify-center flex-1 gap-5 text-xl text-white md:text-sm md:relative md:flex-row lg:gap-10 bg-gradient-to-b from-theme-1 to-theme-2/90 md:bg-none",
-                { "main-menu--show": showMobileMenu },
-              ])}
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white lg:hidden ml-auto"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            {/* Navigation Links */}
+            <nav
+              className={clsx(
+                "absolute lg:static ml-[100px] top-[60px] left-0 w-[93%] lg:w-auto bg-gray-400 lg:bg-transparent py-4 lg:py-0 transition-all duration-300 flex flex-col lg:flex-row justify-center items-center gap-3 text-white",
+                { block: isOpen, "hidden lg:flex": !isOpen }
+              )}
             >
               <a
-                // onClick={(e) => {
-                //   scrollTo(e);
-                //   setShowMobileMenu(!showMobileMenu);
-                // }}
-                data-link="#themes-variants"
-                className="cursor-pointer"
+                href="#themes-variants"
+                className="py-2 px-4 hover:text-gray-300"
               >
-                {/* Themes & Variants */}
+                Themes & Variants
               </a>
               <a
-              // onClick={(e) => {
-              //   scrollTo(e);
-              //   setShowMobileMenu(!showMobileMenu);
-              // }}
-              // data-link="#pages-layouts"
-              // className="cursor-pointer"
+                href="#pages-layouts"
+                className="py-2 px-4 hover:text-gray-300"
               >
-                {/* Pages & Layouts */}
+                Pages & Layouts
               </a>
-              <a
-                // onClick={(e) => {
-                //   scrollTo(e);
-                //   setShowMobileMenu(!showMobileMenu);
-                // }}
-                data-link="#frameworks"
-                className="cursor-pointer"
-              >
-                {/* Frameworks */}
+              <a href="#frameworks" className="py-2 px-4 hover:text-gray-300">
+                Frameworks
               </a>
-              <a
-                // onClick={(e) => {
-                //   scrollTo(e);
-                //   setShowMobileMenu(!showMobileMenu);
-                // }}
-                data-link="#pricing"
-                className="cursor-pointer"
-              >
-                {/* Pricing */}
+              <a href="#pricing" className="py-2 px-4 hover:text-gray-300">
+                Pricing
               </a>
-            </div>
-            <div className="flex gap-2.5 relative ml-auto md:ml-0">
-              {/* <Button
-                as="a"
-                data-link="#colors"
-                rounded
-                onClick={(e: React.MouseEvent) => scrollTo(e)}
-                className="hidden md:block relative text-white bg-white/10 border-white/10 px-2.5"
-              >
-                <Lucide icon="Palette" className="w-4 h-4" />
-                <div className="absolute inset-0" data-link="#colors"></div>
-              </Button> */}
-              <Button
-                as="a"
-                href="/register"
-                // target="_blank"
-                rounded
-                className="hidden px-5 text-white md:block bg-white/10 border-white/10"
-              >
-                <span className="hidden lg:block">Register Now</span>
-                {/* <Lucide icon="Download" className="w-4 h-4 lg:hidden" /> */}
-              </Button>
-              <Button
-                rounded
-                className="px-5 text-white bg-white/10 border-white/10 md:hidden"
-                // onClick={() => setShowMobileMenu(!showMobileMenu)}
 
-                as="a"
-                href="/"
-                // target="_blank"
+              {/* Register Button for Mobile View */}
+              <a
+                href="/register"
+                className="px-5 py-2 bg-white/10 border border-white/10 rounded lg:hidden"
               >
-                {/* {showMobileMenu ? (
-                  <Lucide icon="X" className="w-4 h-4" />
-                ) : (
-                  <Lucide icon="AlignJustify" className="w-4 h-4" />
-                )} */}
-                <span className="">Login</span>
-              </Button>
+                Register Now
+              </a>
+            </nav>
+
+            {/* Buttons Section (Desktop) */}
+            <div className="hidden lg:flex gap-2.5 ml-auto">
+              <a
+                href="/register"
+                className="px-5 py-2 bg-white/10 border border-white/10 rounded"
+              >
+                Register Now
+              </a>
+              <a
+                href="/"
+                className="px-5 py-2 bg-white/10 border border-white/10 rounded lg:hidden"
+              >
+                Login
+              </a>
             </div>
           </div>
         </div>
@@ -2589,42 +2548,41 @@ function Main() {
                 <img
                   src={Maain}
                   alt="Yoga Instructor"
-                  className="w-[767px] h-[230px] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl object-contain"
+                  className="w-[967px] h-[260px] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl object-contain"
                 />
               </div>
             </div>
             <section className="w-full bg-white h-auto flex flex-wrap items-center justify-center py-10 px-2 sm:px-4 md:px-6 lg:px-12">
-              <div className="w-[100%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+              <div className="w-full mx-auto grid grid-cols-1 xl:grid-cols-2 gap-[70px] items-center">
                 {/* Image Grid */}
-                <div className="grid flex-wrap grid-cols-1 sm:grid-cols-2 gap-4 place-items-center">
-                  {mediaFiles.map((media, index) => (
-                    <div
-                      key={index}
-                      className={`w-full min-w-[290px] sm:w-[270px] h-[200px] bg-white rounded-xl shadow-lg p-2 flex justify-center items-center ${
-                        index === 0 ? "sm:col-span-2" : ""
-                      }`}
-                    >
-                      <div className="w-full h-full bg-gray-50 rounded-lg border border-purple-800 flex justify-center items-center overflow-hidden">
-                        <video
-                          className="w-full h-full object-cover rounded-lg"
-                          autoPlay
-                          loop
-                          muted
-                        >
-                          <source src={media.src} type="video/mp4" />
-                        </video>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <div className="grid w-[109%] grid-cols-1 [@media(max-width:1279px)]:ml-[-7%] md:grid-cols-2 gap-4 place-items-center">
+  {mediaFiles.map((media, index) => (
+    <div
+      key={index}
+      className={`w-[295.276px] h-[205px] flex-shrink-0 border border-[#E2E8F0] bg-white rounded-xl p-2 flex justify-center items-center ${
+        index === 0 ? "sm:col-span-2" : ""
+      }`}
+    >
+      <div className="w-full h-full bg-[#E2E8F0] rounded-[9.6px] border border-[#E2E8F0] flex justify-center items-center overflow-hidden">
+        {media.type === "video" ? (
+          <video className="w-full h-full object-cover rounded-[9.6px]" autoPlay loop muted>
+            <source src={media.src} type="video/mp4" />
+          </video>
+        ) : (
+          <img className="w-full h-full object-cover rounded-[9.6px]" src={media.src} alt="media" />
+        )}
+      </div>
+    </div>
+  ))}
+</div>
 
                 {/* Text Section */}
-                <div className="text-center md:text-left h-auto px-2 sm:px-4">
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">
+                <div className="w-[100%] text-center md:text-left h-auto px-2 sm:px-4">
+                  <h2 className="text-[26px] font-semibold leading-[48px] text-[#111] font-['Public_Sans']">
                     Select your preferred format to offer yoga classes – choose
                     from these three options!
                   </h2>
-                  <p className="text-gray-600 mt-3 text-sm sm:text-base md:text-lg">
+                  <p className="text-[14px] font-light leading-[26px] text-[#111] font-['Public_Sans'] mt-3">
                     Join <span className="font-semibold">Swasti Bharat</span> to
                     attract more students, receive secure payments, and build
                     your credibility with verified badges and real-time updates.
@@ -2633,16 +2591,16 @@ function Main() {
               </div>
             </section>
 
-            <section className="w-full bg-white min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-20 xl:px-0 md:pr-20">
+            <section className="w-full p-[150px] h-auto bg-white min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-20 xl:px-0 md:pr-20">
               <div className="w-full h-auto bg-[#FFE7FE] px-4 sm:px-6 md:px-12 py-12 flex justify-center">
                 <div className="w-full max-w-6xl grid grid-cols-1 xl:grid-cols-2 items-center gap-10">
                   {/* Left Content */}
-                  <div className="text-center w-full md:w-[85%] md:text-left px-2 md:px-0">
-                    <h2 className="text-[#111] font-['Public_Sans'] text-xl sm:text-2xl md:text-3xl font-semibold leading-[32px] sm:leading-[40px] md:leading-[48px]">
+                  <div className="text-center w-full md:w-[95%] md:text-left px-2 md:px-0">
+                    <h2 className="text-[#111] font-[Public_Sans] text-[28px] sm:text-[32px] md:text-[36px] font-semibold leading-[32px] sm:leading-[40px] md:leading-[48px]">
                       Get Recognized, Earn More,{" "}
                       <br className="hidden md:block" /> and Teach Effortlessly!
                     </h2>
-                    <p className="text-[#111] font-['Public_Sans'] text-sm sm:text-base font-light leading-[22px] sm:leading-[26px] mt-4">
+                    <p className="text-[#111] font-['Public_Sans'] text-[14px] font-light leading-[26px] mt-4">
                       Join <span className="font-semibold">Swasti Bharat</span>{" "}
                       to attract more students, receive secure payments, and
                       build your credibility with verified badges and real-time
@@ -2653,7 +2611,7 @@ function Main() {
                   {/* Right Grid Layout */}
                   <div className="grid grid-cols-1  md:grid-cols-2 gap-5 sm:gap-8">
                     {/* Left Column */}
-                    <div className="flex flex-col lg:mt-[-120px] max-lg:mt-0 gap-7">
+                    <div className="flex [@media(max-width:1280px)]:mt-[0px] flex-col lg:mt-[-120px] max-lg:mt-0 gap-7">
                       <div className="w-full w-[250px] md:w-[100%] h-[193px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
                         <h3 className="text-black font-['Public_Sans'] text-lg font-semibold leading-7">
                           Verified Instructor Badge
@@ -2696,7 +2654,7 @@ function Main() {
               </div>
             </section>
 
-            <div className="container bg-white mx-auto px-14 py-8">
+            <div className="container pb-[100px] bg-white mx-auto px-14 py-8">
               <div className="flex flex-col gap-10 md:flex-row items-start md:items-center">
                 {/* Left Side - Title and Description */}
                 <div className="md:w-1/2 mb-8 md:mb-0">
@@ -2820,7 +2778,7 @@ function Main() {
             {/* Footer Section */}
             <footer className="pt-[50px] w-[100%] bg-[#78285e]">
               <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                   {/* Logo and Social Icons */}
                   <div className="pl-[30px] flex flex-col items-center md:items-start">
                     {/* <h2 className="font-[16px] mb-4 text-white">Logo</h2> */}
