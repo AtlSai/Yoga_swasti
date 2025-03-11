@@ -2462,7 +2462,7 @@ function Main() {
             {/* Navigation Links */}
             <nav
               className={clsx(
-                "absolute lg:static ml-[100px] top-[60px] left-0 w-[93%] lg:w-auto bg-gray-400 lg:bg-transparent py-4 lg:py-0 transition-all duration-300 flex flex-col lg:flex-row justify-center items-center gap-3 text-white",
+                "absolute lg:static ml-[100px] top-[60px] left-0 w-[93%] lg:w-auto bg-[#78285e] lg:bg-transparent py-4 lg:py-0 transition-all duration-300 flex flex-col lg:flex-row justify-center items-center gap-3 text-white",
                 { block: isOpen, "hidden lg:flex": !isOpen }
               )}
             >
@@ -2488,7 +2488,7 @@ function Main() {
               {/* Register Button for Mobile View */}
               <a
                 href="/register"
-                className="px-5 py-2 bg-white/10 border border-white/10 rounded lg:hidden"
+                className="px-5 py-2 bg-white/10 border border-white/10 rounded lg:hidden text-white font-[Public_Sans] text-sm font-medium leading-5 tracking-[0.35px] rounded-full border border-white/10 bg-white/10 shadow-sm flex items-center justify-center px-5 py-[9px]"
               >
                 Register Now
               </a>
@@ -2498,16 +2498,16 @@ function Main() {
             <div className="hidden lg:flex gap-2.5 ml-auto">
               <a
                 href="/register"
-                className="px-5 py-2 bg-white/10 border border-white/10 rounded"
+                className="text-white font-[Public_Sans] text-sm font-medium leading-5 tracking-[0.35px] rounded-full border border-white/10 bg-white/10 shadow-sm flex items-center justify-center px-5 py-[9px]"
               >
                 Register Now
               </a>
-              <a
+              {/* <a
                 href="/"
                 className="px-5 py-2 bg-white/10 border border-white/10 rounded lg:hidden"
               >
                 Login
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
@@ -2578,11 +2578,11 @@ function Main() {
 
                 {/* Text Section */}
                 <div className="w-[100%] text-center md:text-left h-auto px-2 sm:px-4">
-                  <h2 className="text-[26px] font-semibold leading-[48px] text-[#111] font-['Public_Sans']">
+                  <h2 className="text-[#111] font-[Poppins] text-[28px] not-italic font-semibold leading-[38px]">
                     Select your preferred format to offer yoga classes – choose
                     from these three options!
                   </h2>
-                  <p className="text-[14px] font-light leading-[26px] text-[#111] font-['Public_Sans'] mt-3">
+                  <p className="text-[#333] font-[Poppins] text-[15px] not-italic font-normal leading-[26px]">
                     Join <span className="font-semibold">Swasti Bharat</span> to
                     attract more students, receive secure payments, and build
                     your credibility with verified badges and real-time updates.
@@ -2596,11 +2596,10 @@ function Main() {
                 <div className="w-full max-w-6xl grid grid-cols-1 xl:grid-cols-2 items-center gap-10">
                   {/* Left Content */}
                   <div className="text-center w-full md:w-[95%] md:text-left px-2 md:px-0">
-                    <h2 className="text-[#111] font-[Public_Sans] text-[28px] sm:text-[32px] md:text-[36px] font-semibold leading-[32px] sm:leading-[40px] md:leading-[48px]">
-                      Get Recognized, Earn More,{" "}
-                      <br className="hidden md:block" /> and Teach Effortlessly!
-                    </h2>
-                    <p className="text-[#111] font-['Public_Sans'] text-[14px] font-light leading-[26px] mt-4">
+                  <h2 className="text-[#111] font-[Poppins] text-[28px] not-italic font-semibold leading-[38px]">
+  Get Recognized, Earn More, <br className="hidden md:block" /> and Teach Effortlessly!
+</h2>
+                    <p className="text-[#333] font-[Poppins] text-[15px] not-italic font-normal leading-[26px]">
                       Join <span className="font-semibold">Swasti Bharat</span>{" "}
                       to attract more students, receive secure payments, and
                       build your credibility with verified badges and real-time
@@ -2778,11 +2777,11 @@ function Main() {
             {/* Footer Section */}
             <footer className="pt-[50px] w-[100%] bg-[#78285e]">
               <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <div className="grid md:items-start grid-cols-1 lg:grid-cols-4 gap-8">
                   {/* Logo and Social Icons */}
-                  <div className="pl-[30px] flex flex-col items-center md:items-start">
+                  <div className=" flex flex-col md:items-start">
                     {/* <h2 className="font-[16px] mb-4 text-white">Logo</h2> */}
-                    <div className="bg-[#82396b] mb-[20px] text-white p-4 rounded-lg flex items-center space-x-4">
+                    <div className="bg-[#82396b] mb-[20px] w-[240px] text-white p-4 rounded-lg flex items-center space-x-4">
                       <img
                         alt="Decorative image of a meditating figure"
                         className="h-12 w-12"
