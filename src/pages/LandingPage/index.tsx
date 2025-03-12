@@ -2424,8 +2424,8 @@ function Main() {
   return (
     <div
       className={clsx([
-        "landing-page relative",
-        "before:content-[''] before:w-screen before:h-screen before:fixed before:bg-slate-100 before:z-[-1]",
+        "",
+        "",
         // !showcaseActive && "landing-page--scrolled",
       ])}
     >
@@ -2438,11 +2438,11 @@ function Main() {
         ])}
       >
         <div className="container fixed inset-x-0 z-50 px-5 mx-auto xl:px-0">
-          <div className="relative flex items-center h-16 w-full px-5 mt-5">
+          <div className="relative font-['Public_Sans'] flex items-center h-16 w-full px-5 mt-5">
             <a href="/" className="relative z-10 flex items-center">
               <div className="bg-[#82396b] text-white p-4 rounded-lg flex items-center space-x-4">
                 <img src={Logo} alt="Logo" className="h-12 w-12" />
-                <div>
+                <div className="hidden md:block">
                   <p className="text-orange-400">
                     Swasth Bharat <span className="text-white">with</span>
                   </p>
@@ -2459,13 +2459,25 @@ function Main() {
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
 
-            {/* Navigation Links */}
+            {/* Navigation Sidebar */}
             <nav
               className={clsx(
-                "absolute lg:static ml-[100px] top-[60px] left-0 w-[93%] lg:w-auto bg-[#78285e] lg:bg-transparent py-4 lg:py-0 transition-all duration-300 flex flex-col lg:flex-row justify-center items-center gap-3 text-white",
-                { block: isOpen, "hidden lg:flex": !isOpen }
+                "fixed top-0 left-0 z-10 h-screen w-[70%] bg-[#78285e] transition-all duration-300 flex flex-col items-start gap-[40px] px-6 text-white lg:static lg:h-auto lg:w-auto lg:bg-transparent lg:flex-row lg:justify-center lg:items-center lg:gap-3",
+                { "hidden lg:flex": !isOpen }
               )}
             >
+              {/* Close Button inside Sidebar */}
+
+              {/* Logo inside Sidebar (Visible only when sidebar is open) */}
+              {isOpen && (
+                <div className="flex items-center mt-[30px] gap-3">
+                  <img src={Logo} alt="Logo" className="h-10 w-10" />
+                  <span className="text-white text-lg font-bold">
+                    Swasti Bharat
+                  </span>
+                </div>
+              )}
+
               <a
                 href="#themes-variants"
                 className="py-2 px-4 hover:text-gray-300"
@@ -2488,7 +2500,7 @@ function Main() {
               {/* Register Button for Mobile View */}
               <a
                 href="/register"
-                className="px-5 py-2 bg-white/10 border border-white/10 rounded lg:hidden text-white font-[Public_Sans] text-sm font-medium leading-5 tracking-[0.35px] rounded-full border border-white/10 bg-white/10 shadow-sm flex items-center justify-center px-5 py-[9px]"
+                className="px-5 py-2 bg-white/10 border border-white/10 rounded lg:hidden text-white font-[Public_Sans] text-sm font-medium leading-5 tracking-[0.35px] rounded-full shadow-sm flex items-center justify-center mt-4"
               >
                 Register Now
               </a>
@@ -2515,16 +2527,16 @@ function Main() {
           <div className="flex flex-col items-center "> */}
         <div className="container relative z-10 pt-40 flex items-center justify-center">
           <div className="flex w-[100%] flex-col items-center w-full">
-            <div className="container h-[70vh]  mx-auto flex flex-col md:flex-row items-center justify-center px-10 sm:px-6 md:px-10 lg:px-16 xl:px-28">
+            <div className="container h-[70vh] w-full flex flex-col md:flex-row items-center justify-center sm:px10  sm:px-6">
               {/* Left Side - Text Content */}
               <div className="w-full md:w-5/12 lg:w-6/12 xl:w-6/12 text-center md:text-left flex flex-col items-center md:items-start justify-center">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-white">
+                <h1 className="text-3xl sm:text-4xl font-['Public_Sans'] md:text-5xl font-semibold leading-tight text-white">
                   Are you a certified <br />
                 </h1>
-                <h1 className="text-[#E3A09B] mt-2 text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight">
+                <h1 className="text-[#E3A09B] mt-2 text-3xl font-['Public_Sans'] sm:text-4xl md:text-5xl font-semibold leading-tight">
                   Yoga Instructor
                 </h1>
-                <p className="text-white/80 text-base sm:text-lg mt-4 px-2 sm:px-0">
+                <p className="text-white/80 font-['Public_Sans'] text-base sm:text-lg mt-4 px-2 sm:px-0">
                   Empower Lives Through Yoga – Inspire, Teach & Earn. Join
                   Swasti Bharat – Where Your Passion for Yoga Meets Unlimited
                   Growth!
@@ -2552,37 +2564,52 @@ function Main() {
                 />
               </div>
             </div>
-            <section className="w-full bg-white h-auto flex flex-wrap items-center justify-center py-10 px-2 sm:px-4 md:px-6 lg:px-12">
+            <section className="w-full font-['Public_Sans'] bg-white h-auto flex flex-wrap items-center justify-center py-10 px-2 sm:px-4 md:px-6 lg:px-12">
               <div className="w-full mx-auto grid grid-cols-1 xl:grid-cols-2 gap-[70px] items-center">
                 {/* Image Grid */}
-                <div className="grid w-[109%] grid-cols-1 [@media(max-width:1279px)]:ml-[-7%] md:grid-cols-2 gap-4 place-items-center">
-  {mediaFiles.map((media, index) => (
-    <div
-      key={index}
-      className={`w-[295.276px] h-[205px] flex-shrink-0 border border-[#E2E8F0] bg-white rounded-xl p-2 flex justify-center items-center ${
-        index === 0 ? "sm:col-span-2" : ""
-      }`}
-    >
-      <div className="w-full h-full bg-[#E2E8F0] rounded-[9.6px] border border-[#E2E8F0] flex justify-center items-center overflow-hidden">
-        {media.type === "video" ? (
-          <video className="w-full h-full object-cover rounded-[9.6px]" autoPlay loop muted>
-            <source src={media.src} type="video/mp4" />
-          </video>
-        ) : (
-          <img className="w-full h-full object-cover rounded-[9.6px]" src={media.src} alt="media" />
-        )}
-      </div>
-    </div>
-  ))}
-</div>
+                <div className="grid w-[109%] grid-cols-1 [@media(max-width:1279px)]:w-auto   md:grid-cols-2 gap-4 place-items-center">
+                  {mediaFiles.map((media, index) => (
+                    <div
+                      key={index}
+                      className={`w-[295.276px] h-[205px] flex-shrink-0 border border-[#E2E8F0] bg-white rounded-xl p-2 flex justify-center items-center ${
+                        index === 0 ? "sm:col-span-2" : ""
+                      }`}
+                    >
+                      {/* Media Content */}
+                      <div className="relative w-full h-full bg-[#E2E8F0] rounded-[9.6px] border border-[#E2E8F0] flex justify-center items-center overflow-hidden">
+                        <div className="absolute bottom-0 z-10 left-0 w-full h-[39px] bg-[#84316A] rounded-b-[9.6px]"></div>
+                        {media.type === "video" ? (
+                          <div className="relative w-full h-full">
+                            <video
+                              className="w-full h-full object-cover rounded-[9.6px]"
+                              autoPlay
+                              loop
+                              muted
+                            >
+                              <source src={media.src} type="video/mp4" />
+                            </video>
+                            {/* Bottom Rectangle for Videos Only */}
+                            {/* <div className="absolute bottom-0 z-10 left-0 w-full h-[39px] bg-[#84316A] rounded-b-[9.6px]"></div> */}
+                          </div>
+                        ) : (
+                          <img
+                            className="w-full h-full object-cover rounded-[9.6px]"
+                            src={media.src}
+                            alt="media"
+                          />
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
                 {/* Text Section */}
                 <div className="w-[100%] text-center md:text-left h-auto px-2 sm:px-4">
-                  <h2 className="text-[#111] font-[Poppins] text-[28px] not-italic font-semibold leading-[38px]">
+                  <h2 className="text-[#111] font-['Public_Sans'] text-[28px] not-italic font-semibold leading-[38px]">
                     Select your preferred format to offer yoga classes – choose
                     from these three options!
                   </h2>
-                  <p className="text-[#333] font-[Poppins] text-[15px] not-italic font-normal leading-[26px]">
+                  <p className="text-[#333] font-['Public_Sans'] text-[15px] not-italic font-normal leading-[26px]">
                     Join <span className="font-semibold">Swasti Bharat</span> to
                     attract more students, receive secure payments, and build
                     your credibility with verified badges and real-time updates.
@@ -2591,15 +2618,16 @@ function Main() {
               </div>
             </section>
 
-            <section className="w-full p-[150px] h-auto bg-white min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-20 xl:px-0 md:pr-20">
+            <section className="w-full h-auto bg-white min-h-screen flex items-center justify-center">
               <div className="w-full h-auto bg-[#FFE7FE] px-4 sm:px-6 md:px-12 py-12 flex justify-center">
-                <div className="w-full max-w-6xl grid grid-cols-1 xl:grid-cols-2 items-center gap-10">
+                <div className="w-full pb-[30px] grid grid-cols-1 xl:grid-cols-2 items-center gap-10">
                   {/* Left Content */}
                   <div className="text-center w-full md:w-[95%] md:text-left px-2 md:px-0">
-                  <h2 className="text-[#111] font-[Poppins] text-[28px] not-italic font-semibold leading-[38px]">
-  Get Recognized, Earn More, <br className="hidden md:block" /> and Teach Effortlessly!
-</h2>
-                    <p className="text-[#333] font-[Poppins] text-[15px] not-italic font-normal leading-[26px]">
+                    <h2 className="text-[#111] font-['Public_Sans'] text-[28px] not-italic font-semibold leading-[38px]">
+                      Get Recognized, Earn More,{" "}
+                      <br className="hidden md:block" /> and Teach Effortlessly!
+                    </h2>
+                    <p className="text-[#333] font-['Public_Sans'] text-[15px] not-italic font-normal leading-[26px]">
                       Join <span className="font-semibold">Swasti Bharat</span>{" "}
                       to attract more students, receive secure payments, and
                       build your credibility with verified badges and real-time
@@ -2611,19 +2639,19 @@ function Main() {
                   <div className="grid grid-cols-1  md:grid-cols-2 gap-5 sm:gap-8">
                     {/* Left Column */}
                     <div className="flex [@media(max-width:1280px)]:mt-[0px] flex-col lg:mt-[-120px] max-lg:mt-0 gap-7">
-                      <div className="w-full w-[250px] md:w-[100%] h-[193px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
+                      <div className="w-full w-[250px] md:w-[100%] [@media(max-width:1280px)]:h-auto h-[193px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
                         <h3 className="text-black font-['Public_Sans'] text-lg font-semibold leading-7">
                           Verified Instructor Badge
                         </h3>
-                        <p className="text-[#3B3B3B] font-['Poppins'] text-sm font-normal leading-6">
+                        <p className="text-[#3B3B3B] font-['Public_Sans'] text-sm font-normal leading-6">
                           Build trust and attract more students.
                         </p>
                       </div>
-                      <div className="w-full w-[250px] md:w-[100%] h-[193px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
+                      <div className="w-full w-[250px] [@media(max-width:1280px)]:h-auto md:w-[100%] h-[193px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
                         <h3 className="text-black font-['Public_Sans'] text-lg font-semibold leading-7">
                           Real-Time Notifications
                         </h3>
-                        <p className="text-[#3B3B3B] font-['Poppins'] text-sm font-normal leading-6">
+                        <p className="text-[#3B3B3B] font-['Public_Sans'] text-sm font-normal leading-6">
                           Instant alerts for bookings, payments, and messages.
                         </p>
                       </div>
@@ -2631,19 +2659,19 @@ function Main() {
 
                     {/* Right Column */}
                     <div className="flex flex-col gap-7">
-                      <div className="w-full w-[316px] md:w-[100%] h-[169px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
+                      <div className="w-full w-[316px] [@media(max-width:1280px)]:h-auto md:w-[100%] h-[169px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
                         <h3 className="text-black font-['Public_Sans'] text-lg font-semibold leading-7">
                           Zero Investment, Maximum Earnings
                         </h3>
-                        <p className="text-[#3B3B3B] font-['Poppins'] text-sm font-normal leading-6">
+                        <p className="text-[#3B3B3B] font-['Public_Sans'] text-sm font-normal leading-6">
                           Secure, timely payouts with zero hidden charges.
                         </p>
                       </div>
-                      <div className="w-full w-[200px] md:w-[100%] h-[169px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
+                      <div className="w-full w-[200px] [@media(max-width:1280px)]:h-auto md:w-[100%] h-[169px] p-5 bg-white rounded-[20px] border border-[#F0EFFC] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.04)]">
                         <h3 className="text-black font-['Public_Sans'] text-lg font-semibold leading-7">
                           Location-Based Bookings
                         </h3>
-                        <p className="text-[#3B3B3B] font-['Poppins'] text-sm font-normal leading-6">
+                        <p className="text-[#3B3B3B] font-['Public_Sans'] text-sm font-normal leading-6">
                           Nearby student sessions.
                         </p>
                       </div>
@@ -2653,15 +2681,15 @@ function Main() {
               </div>
             </section>
 
-            <div className="container pb-[100px] bg-white mx-auto px-14 py-8">
-              <div className="flex flex-col gap-10 md:flex-row items-start md:items-center">
+            <div className="container bg-white mx-auto px-8 py-8">
+              <div className="flex flex-col gap-5 md:flex-row items-start md:items-center">
                 {/* Left Side - Title and Description */}
                 <div className="md:w-1/2 mb-8 md:mb-0">
-                  <h1 className="text-[#111] font-[Poppins] text-[28px] not-italic font-semibold leading-[38px]">
+                  <h1 className="text-[#111] font-[public sans] text-[28px] not-italic font-semibold leading-[38px]">
                     Why <span className="text-[#82396b]">Swasti Bharat</span> is
                     Best for Instructors
                   </h1>
-                  <p className="text-[#333] font-[Poppins] text-[15px] not-italic font-normal leading-[26px]">
+                  <p className="text-[#333] font-[public sans] text-[15px] not-italic font-normal leading-[26px]">
                     All the benefits that come with selling on Meesho are
                     designed to help you sell more and make it easier to grow
                     your business.
@@ -2775,7 +2803,7 @@ function Main() {
             </div>
 
             {/* Footer Section */}
-            <footer className="pt-[50px] w-[100%] bg-[#78285e]">
+            <footer className="pt-[50px] font-['Public_Sans'] w-[100%] bg-[#78285e]">
               <div className="container mx-auto px-4">
                 <div className="grid md:items-start grid-cols-1 lg:grid-cols-4 gap-8">
                   {/* Logo and Social Icons */}
