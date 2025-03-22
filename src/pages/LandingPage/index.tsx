@@ -2001,6 +2001,13 @@ import Video1 from "../../assets/video1.gif";
 import Video2 from "../../assets/video2.gif";
 import Video3 from "../../assets/video3.gif";
 import { Menu, X } from "lucide-react";
+import Person from "../../assets/person1.png";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination, Navigation } from "swiper/modules";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Backimage from "../../assets/backimage.png"
 
 const images = [Vector, Vector, Vector, Vector, Vector, Vector, Vector, Vector];
 function Main() {
@@ -2097,6 +2104,34 @@ function Main() {
     {
       type: "image",
       src: Video3,
+    },
+  ];
+
+  const data = [
+    {
+      id: 1,
+      title: "What is Swasti Bharat?",
+      description:
+        "Swasti Bharat is a platform where yoga instructors can list their services, and students can book online or offline yoga sessions. It connects people looking for yoga classes with certified and experienced instructors.",
+    },
+    {
+      id: 2,
+      title: "How does Swasti Bharat work?",
+      description:
+        "For users, Swasti Bharat allows you to browse and book yoga sessions based on your preference (online/offline, group/private). For instructors, it provides a platform to offer classes, manage schedules, and earn money.",
+    },
+    {
+      id: 3,
+      title: "How do I contact customer support?",
+      description:
+        "You can reach us via email, phone, or live chat on our website. Go to the ‘Help & Support’ section and choose your preferred method to contact us.",
+    },
+    {
+      id: 4,
+      title:
+        "What makes Swasti Bharat unique compared to other yoga platforms?",
+      description:
+        "Swasti Bharat stands out because of:\n- **Low Commission for Instructors** – Only 10%, one of the lowest in the industry.\n- **Zero Registration Fees** – Instructors can onboard for free without any upfront charges.\n- **Flexible Class Options** – Instructors can offer one-day, weekly, or monthly classes.\n- **Transparent Earnings** – Instructors can track earnings and withdrawals in real-time.\n- **Affordable Yoga for Users** – Quality yoga classes at competitive prices.\n- **Expert Instructors** – Only well-certified and experienced yoga teachers are listed.",
     },
   ];
 
@@ -2450,7 +2485,6 @@ function Main() {
                 </div>
               </div>
             </a>
-
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -2564,10 +2598,10 @@ function Main() {
                 />
               </div>
             </div>
-            <section className="w-full font-['Public_Sans'] bg-white h-auto flex flex-wrap items-center justify-center py-10 px-2 sm:px-4 md:px-6 lg:px-12">
-              <div className="w-full mx-auto grid grid-cols-1 xl:grid-cols-2 gap-[70px] items-center">
+            <section className="w-full font-['Public_Sans'] bg-white h-auto flex flex-wrap items-center justify-center py-10 px-4">
+              <div className="w-full grid grid-cols-1 xl:grid-cols-2 gap-[70px] items-center">
                 {/* Image Grid */}
-                <div className="grid w-[109%] grid-cols-1 [@media(max-width:1279px)]:w-auto   md:grid-cols-2 gap-4 place-items-center">
+                <div className="grid w-[109%] grid-cols-1 [@media(max-width:1279px)]:w-auto md:grid-cols-2 gap-4 place-items-center">
                   {mediaFiles.map((media, index) => (
                     <div
                       key={index}
@@ -2577,7 +2611,6 @@ function Main() {
                     >
                       {/* Media Content */}
                       <div className="relative w-full h-full bg-[#E2E8F0] rounded-[9.6px] border border-[#E2E8F0] flex justify-center items-center overflow-hidden">
-                        <div className="absolute bottom-0 z-10 left-0 w-full h-[39px] bg-[#84316A] rounded-b-[9.6px]"></div>
                         {media.type === "video" ? (
                           <div className="relative w-full h-full">
                             <video
@@ -2588,8 +2621,6 @@ function Main() {
                             >
                               <source src={media.src} type="video/mp4" />
                             </video>
-                            {/* Bottom Rectangle for Videos Only */}
-                            {/* <div className="absolute bottom-0 z-10 left-0 w-full h-[39px] bg-[#84316A] rounded-b-[9.6px]"></div> */}
                           </div>
                         ) : (
                           <img
@@ -2598,6 +2629,14 @@ function Main() {
                             alt="media"
                           />
                         )}
+                        {/* Bottom Ribbon with Text */}
+                        <div className="absolute bottom-0 z-10 left-0 w-full h-[39px] bg-[#84316A] rounded-b-[9.6px] flex justify-center items-center text-orange-400 font-semibold">
+                          {index === 0
+                            ? "Yoga Classes"
+                            : index === 1
+                            ? "Offline Classes"
+                            : "Online Classes"}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -2619,7 +2658,7 @@ function Main() {
             </section>
 
             <section className="w-full h-auto bg-white min-h-screen flex items-center justify-center">
-              <div className="w-full h-auto bg-[#FFE7FE] px-4 sm:px-6 md:px-12 py-12 flex justify-center">
+              <div className="w-full h-auto bg-[#FFE7FE] px-4  pt-12 flex justify-center">
                 <div className="w-full pb-[30px] grid grid-cols-1 xl:grid-cols-2 items-center gap-10">
                   {/* Left Content */}
                   <div className="text-center w-full md:w-[95%] md:text-left px-2 md:px-0">
@@ -2680,8 +2719,27 @@ function Main() {
                 </div>
               </div>
             </section>
-
-            <div className="container bg-white mx-auto px-8 py-8">
+            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-around bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${Backimage})` }}
+            >
+        <div className="text-white w-[60%]">
+            <h2 className="text-2xl font-bold">
+                Join 1,500+ Instructors Growing with <span className="text-orange-500">Swasti Bharat</span>
+            </h2>
+            <p className="mt-4 text-lg">
+                Showcase your expertise, connect with students, and grow your yoga practice on a trusted, government-recognized platform. Start your journey today!
+            </p>
+            <button className="mt-6 bg-orange-500 text-white font-semibold py-2 px-4 rounded">
+                Join Now
+            </button>
+        </div>
+        <div className="bg-purple-800 w-[150px] h-[150px] text-white p-6 rounded-lg">
+            <h3 className="text-2xl font-bold text-orange-500">1500+</h3>
+            <p className="mt-2 text-md">Certified</p>
+            <p className="text-md">Yoga Instructors</p>
+        </div>
+    </div>
+            <div className="container bg-white mx-auto px-4 py-4">
               <div className="flex flex-col gap-5 md:flex-row items-start md:items-center">
                 {/* Left Side - Title and Description */}
                 <div className="md:w-1/2 mb-8 md:mb-0">
@@ -2798,6 +2856,77 @@ function Main() {
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="container bg-[#fcf2fc] mx-auto py-4 px-4">
+              <h1 className="font-[500] text-[44px] leading-[44px] tracking-[0.35px] text-center flex items-center justify-center mb-2">
+                Frequently Asked Questions
+              </h1>
+
+              <p className="font-[300] text-[18px] leading-[24px] tracking-[0.35px] text-center text-gray-600 flex items-center justify-center mb-12">
+                Find everything you need to know about joining, teaching, <br />
+                and growing on Swasti Bharat.
+              </p>
+
+              <div className="w-[100%] flex flex-col xl:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-8">
+                <div className="flex w-[100%] h-[420px] flex-col items-center">
+                  <img
+                    alt="Illustration of a person sitting on a bench with question marks and lightbulbs around them"
+                    className="w-[393px] h-[370px] mb-4"
+                    src={Person}
+                  />
+                </div>
+
+                <div className="relative w-full sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[55%] h-auto mx-auto">
+                  {/* Navigation Buttons */}
+                  <div className="absolute bottom-[20px] left-[-20px] transform -translate-x-1/2 flex flex-row gap-4 z-10">
+  <button title="btn" className="custom-prev bg-gray-200 p-3 rounded-full shadow-lg flex items-center justify-center w-12 h-12">
+    <ChevronLeft className="w-6 h-6" />
+  </button>
+  <button title="btn" className="custom-next bg-gray-200 p-3 rounded-full shadow-lg flex items-center justify-center w-12 h-12">
+    <ChevronRight className="w-6 h-6" />
+  </button>
+</div>
+
+                  {/* Swiper Component */}
+                  <Swiper
+                    modules={[Navigation]}
+                    spaceBetween={20}
+                    slidesPerView="auto"
+                    pagination={{ clickable: true }}
+                    navigation={{
+                      prevEl: ".custom-prev",
+                      nextEl: ".custom-next",
+                    }}
+                    centeredSlides={false}
+                  >
+                    {data.map((item, index) => (
+                      <SwiperSlide key={item.id} className="w-[270px]">
+                        <div
+                          className={`p-6 rounded-[32px] h-[351px] mx-auto 
+                ${
+                  index === 0
+                    ? "bg-transparent shadow-none"
+                    : "bg-white shadow-lg"
+                }`}
+                        >
+                          <div className="flex justify-center mb-4">
+                            <div className="bg-gradient-to-b from-[#78285d] to-[#a13e77] text-white rounded-full w-12 h-12 flex items-center justify-center text-lg font-semibold">
+                              {index + 1}
+                            </div>
+                          </div>
+                          <h2 className="text-center text-lg font-semibold mb-3">
+                            {item.title}
+                          </h2>
+                          <p className="text-center text-gray-600 text-sm">
+                            {item.description}
+                          </p>
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
                 </div>
               </div>
             </div>
